@@ -123,12 +123,17 @@ export default class MainFeedPage extends Component {
             Feeder.
           </Box>
         </Typography>
+
         <Grid
           container
           direction="column"
           justify="flex-start"
           alignItems="center"
           spacing={3}
+          style={{
+            margin: 0,
+            width: '100%'
+          }}
         >
           {
             Object.keys(feeds).map(feed => {

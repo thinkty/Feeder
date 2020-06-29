@@ -9,12 +9,11 @@ import {
   Paper,
   Grid,
   Typography,
-  ExpansionPanel,
+  ListItem,
 } from '@material-ui/core';
 import FeedCard from './FeedCard';
 
-// 5 posts per page
-const postsPerPage = 5;
+const Height = 500;
 
 export default class FeedContainer extends Component {
 
@@ -22,66 +21,52 @@ export default class FeedContainer extends Component {
     super(props);
     this.state = {
       feed: this.props.feed,
-      page: [],
-      pageNum: 0
+      windowWidth: window.innerHeight
     };
   }
 
   /**
-   * Load the first page of items on props update
-   * from parent component
+   * Update window size
    */
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.feed.items.length !== 
-        this.props.feed.items.length) {
-          
-      const feed = this.props.feed;
-      const items = feed.items;
-      let page = [];
-      console.log(items);
-      console.log(items.length);
-      for (let i = 0; i < postsPerPage; i++) {
-        if (i === items.length) {
-          break;
-        }
-        page.push(items[i]);
-      }
-  
-      this.setState({ feed, page });
-    }
+  componentDidMount() {
+    this.updateWindowWidth();
+    window.addEventListener('resize', this.updateWindowWidth);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth);
   }
 
+  /**
+   * Method to update window width on change
+   */
+  updateWindowWidth = () => {
+    this.setState({
+      windowWidth: window.innerHeight
+    });
+  }
 
   /**
-   * Method to load next page
+   * Get the contents of the item based on the
+   * given index.
+   * 
+   * @param {Number} index Index of the item in the array
+   * @returns An object with item info or null on error
    */
-  loadNextPage = () => {
-    const items = this.state.feed.items;
-    let pageNum = this.state.pageNum;
-    pageNum++;
-
-    // Check if page number has exceeded
-    if (pageNum * postsPerPage >= items.length) {
-      pageNum = 0;
+  getItemContents = (index) => {
+    const feed = this.state.feed;
+    const items = feed.items;
+    
+    if (items === undefined ||
+        items[index] === undefined) {
+      return null;
     }
-
-    // Get items of next page
-    const index = postsPerPage * pageNum;
-    let page = [];
-    for (let i = index; i < index + postsPerPage; i++) {
-      if (i === items.length) {
-        break;
-      }
-      page.push(items[i]);
-    }
-
-    this.setState({ items, pageNum });
+    return items[index];
   }
 
   render() {
     const feed = this.state.feed;
     const feedInfo = feed.feedInfo;
-    const items = this.state.page;
+    const items = feed.items;
 
     return (
       <Grid item>
@@ -115,31 +100,13 @@ export default class FeedContainer extends Component {
           { '- ' + feedInfo.desc }
         </Typography>
 
-        <Paper elevation={3}>
-          {
-            items.map(item => {
-              // return (
-              //   <ExpansionPanel
-              //     key={item.title}
-
-              //   >
-
-              //   </ExpansionPanel>
-              // );
-              console.log(item)
-              return (
-                <FeedCard 
-                  title={item.title}
-                  date={item.date}
-                  author={item.author}
-                  link={item.link}
-                  comments={item.comments}
-                  categories={item.categories}
-                  content={item.content}
-                />
-              );
-            })
-          }
+        <Paper 
+          elevation={3}
+          style={{
+            height: Height,
+            width: window.innerWidth-60
+          }}
+        >
         </Paper>
       </Grid>
     )
