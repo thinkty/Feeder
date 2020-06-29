@@ -11,9 +11,8 @@ import {
   Typography,
   ListItem,
 } from '@material-ui/core';
+import { FixedSizeList as List } from 'react-window';
 import FeedCard from './FeedCard';
-
-const Height = 500;
 
 export default class FeedContainer extends Component {
 
@@ -21,7 +20,7 @@ export default class FeedContainer extends Component {
     super(props);
     this.state = {
       feed: this.props.feed,
-      windowWidth: window.innerHeight
+      windowWidth: window.innerWidth
     };
   }
 
@@ -41,7 +40,7 @@ export default class FeedContainer extends Component {
    */
   updateWindowWidth = () => {
     this.setState({
-      windowWidth: window.innerHeight
+      windowWidth: window.innerWidth
     });
   }
 
@@ -67,6 +66,9 @@ export default class FeedContainer extends Component {
     const feed = this.state.feed;
     const feedInfo = feed.feedInfo;
     const items = feed.items;
+    const Height = 300;
+    const Width = this.state.windowWidth - 60;
+    const ItemWidth = 300;
 
     return (
       <Grid item>
@@ -96,17 +98,36 @@ export default class FeedContainer extends Component {
         <Typography
           variant="body2"
           color="textSecondary"
+          gutterBottom
         >
           { '- ' + feedInfo.desc }
         </Typography>
 
         <Paper 
-          elevation={3}
+          elevation={0}
+          variant="outlined"
           style={{
             height: Height,
-            width: window.innerWidth-60
+            width: Width
           }}
         >
+          <List
+            height={Height}
+            width={Width}
+            itemCount={items.length}
+            itemSize={ItemWidth}
+            layout="horizontal"
+          >
+            {({index, style}) => {
+              const item = items[index];
+              return (
+                <FeedCard 
+                  item={item}
+                  style={style}
+                />
+              );
+            }}
+          </List>
         </Paper>
       </Grid>
     )

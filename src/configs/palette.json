@@ -2,7 +2,8 @@
   "palette": {
     "background": {
       "default": "#1f2d42",
-      "paper": "#344452"
+      "paper": "#344452",
+      "post": "fdfdfc"
     },
     "primary": {
       "main": "#344452"

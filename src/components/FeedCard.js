@@ -13,32 +13,29 @@ import React, { Component } from 'react';
  */
 
 import { 
-  Card, 
-  CardHeader, 
-  IconButton, 
-  CardContent, 
-  Typography,
-  CardActions,
-  Chip,
-  Collapse,
+  Paper,
+
 } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import ChatIcon from '@material-ui/icons/Chat';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
+const palette = require('../configs/palette.json');
+
 export default class FeedCard extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      title: props.title,
-      date: props.title,
-      author: props.author,
-      link: props.link,
-      comments: props.comments,
-      categories: props.categories,
-      content: props.content,
+      style: props.style,
+      title: props.item.title,
+      date: props.item.date,
+      author: props.item.author,
+      link: props.item.link,
+      comments: props.item.comments,
+      categories: props.item.categories,
+      content: props.item.content,
       openContent: false,
     };
   }
@@ -54,66 +51,35 @@ export default class FeedCard extends Component {
   }
 
   render() {
+    const Margin = 5;
+    const ItemHeight = 280;
+
     const categories = this.state.categories;
+    let style = this.state.style;
 
     return (
-      <Card>
+      <Paper
+        elevation={20}
+        variant="elevation"
+        style={{
+          ...style,
+          left: style.left + Margin,
+          top: style.top + Margin,
+          width: style.width - Margin,
+          height: ItemHeight - Margin,
+          backgroundColor: palette.palette.background.post
+        }}
+      >
+        
+      
         {/* Author, Date, Link */}
-        <CardHeader 
-          action={
-            <IconButton href={this.state.link}>
-              <LinkIcon />
-            </IconButton>
-          }
-          title={this.state.author}
-          subheader={this.state.date}
-        />
 
         {/* Title */}
-        <CardContent>
-          <Typography>
-            {this.state.title}
-          </Typography>
-        </CardContent>
 
         {/* Categories, Comments, Content */}
-        <CardActions>
-          {
-            categories &&
-            categories.forEach(category => {
-              return (<Chip label={category} />);
-            })
-          }
-          {
-            this.state.comments &&
-            <IconButton href={this.state.comments}>
-              <ChatIcon />
-            </IconButton>
-          }
-          {
-            <IconButton onClick={this.handleToggleContent}>
-              {
-                this.state.openContent
-                ? <ExpandLessIcon />
-                : <ExpandMoreIcon />
-              }
-            </IconButton>
-          }
-        </CardActions>
 
         {/* Content */}
-        <Collapse
-          in={this.state.openContent}
-          timeout='auto'
-          unmountOnExit
-        >
-          <CardContent>
-            {
-              this.state.content
-            }
-          </CardContent>
-        </Collapse>
-      </Card>
+      </Paper>
     );
   }
 }

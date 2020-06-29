@@ -111,6 +111,7 @@ export default class MainFeedPage extends Component {
       <div>
         <Typography
           variant="h3"
+          color="secondary"
           style={{
             marginTop: '100px',
             marginBottom: '50px',
