@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  ThemeProvider,
+  createMuiTheme,
+  CssBaseline
+} from '@material-ui/core';
+import 'typeface-muli';
+import MainFeedPage from './components/MainFeedPage';
+const palette = require('./configs/palette.json').palette;
+
+const theme = createMuiTheme({
+  palette: palette,
+  typography: {
+    fontFamily: 'Muli',
+  }
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider 
+      theme={theme}
+    >
+      <CssBaseline />
+      <MainFeedPage/>
+    </ThemeProvider>
   );
 }
 
