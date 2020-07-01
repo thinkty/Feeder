@@ -60,6 +60,8 @@ export default class FeedCard extends Component {
 
     const categories = this.state.categories;
     const comments = this.state.comments;
+    const content = this.state.content;
+    const link = this.state.link;
 
     return (
       <div>
@@ -124,82 +126,97 @@ export default class FeedCard extends Component {
             }}
           />
 
-          {/* Content, Link */}
           <Grid
             container
-            direction="row"
-            justify="space-evenly"
+            direction="column"
+            justify="space-between"
             alignItems="center"
           >
-            <Grid item>
-              <Tooltip title="See content">
-                <IconButton>
-                  <SubjectIcon 
-                    style={{
-                      color: feedCardIconTheme.content
-                    }}
-                  />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item>
-              <Tooltip title="Go to source">
-                <IconButton>
-                  <LinkIcon 
-                    style={{
-                      color: feedCardIconTheme.link
-                    }}
-                  />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
 
-          {/* Categories */}
-          { 
-            categories &&
+            {/* Content, Link */}
             <Grid
+              item
               container
               direction="row"
-              justify="center"
+              justify="space-evenly"
               alignItems="center"
-              spacing={1}
             >
-              {
-                categories.map((category) => (
-                  <Grid 
-                    item
-                    key={category}
-                  >
-                    <Chip 
-                      size="small"
-                      label={category}
+              <Grid item>
+                <Tooltip title="See content">
+                  <IconButton>
+                    <SubjectIcon 
                       style={{
-                        color: feedCardTextTheme.categories,
-                        backgroundColor: feedCardIconTheme.categories
+                        color: feedCardIconTheme.content
                       }}
                     />
-                  </Grid>
-                ))
-              }
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+              <Grid item>
+                <Tooltip title="Go to source">
+                  <IconButton
+                    href={link}
+                  >
+                    <LinkIcon 
+                      style={{
+                        color: feedCardIconTheme.link
+                      }}
+                    />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
             </Grid>
-          }
 
-          {/* Comments */}
-          {
-            comments &&
-            <Button
-              variant="outlined"
-              href={comments}
-              style={{
-                width: "100%",
-                color: feedCardTextTheme.comments,
-                backgroundColor: feedCardIconTheme.comments
-              }}
-            >
-              See Comments
-            </Button>
-          }
+              {/* Categories */}
+              { 
+                categories &&
+                <Grid
+                  item
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                  spacing={1}
+                >
+                  {
+                    categories.map((category) => (
+                      <Grid 
+                        item
+                        key={category}
+                      >
+                        <Chip 
+                          size="small"
+                          label={category}
+                          style={{
+                            color: feedCardTextTheme.categories,
+                            backgroundColor: feedCardIconTheme.categories
+                          }}
+                        />
+                      </Grid>
+                    ))
+                  }
+                </Grid>
+              }
+
+              {/* Comments */}
+              {
+                comments &&
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    href={comments}
+                    style={{
+                      width: "100%",
+                      color: feedCardTextTheme.comments,
+                      backgroundColor: feedCardIconTheme.comments
+                    }}
+                  >
+                    See Comments
+                  </Button>
+                </Grid>
+              }
+
+          </Grid>
         </Paper>
 
         {/* Content Dialog */}
