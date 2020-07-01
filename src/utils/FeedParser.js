@@ -81,6 +81,7 @@ exports.parseDate = (dateStr) => {
   let date = new Date(dateStr);
   let result = date.getFullYear() + ' ';
   result += months[date.getMonth()] + ' ';
+  result += date.getDate() + '';
   return result;
 }
 

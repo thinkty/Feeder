@@ -1,0 +1,10 @@
+{
+  "feedcard": {
+    "margin": {
+      "left": 5,
+      "top": 5
+    },
+    "height": 280,
+    "padding": 5
+  }
+}

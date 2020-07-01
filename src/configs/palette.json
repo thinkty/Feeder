@@ -1,17 +1,30 @@
 {
-  "mui" :{
+  "mui": {
     "background": {
       "default": "#1f2d42",
       "paper": "#344452",
       "post": "fdfdfc"
     }
   },
-  "text" : {
+  "text": {
     "header": "#b94220",
     "feed": {
       "title": "#fdfdfc",
       "group": "#8b96a4",
       "desc": "#8b96a4"
+    },
+    "feedcard": {
+      "title": "#fdfdfc",
+      "author": "",
+      "date": "",
+      "categories": ""
+    }
+  },
+  "icons": {
+    "feedcard": {
+      "categories": "",
+      "comments": "",
+      "content": ""
     }
   }
 }

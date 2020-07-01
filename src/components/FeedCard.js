@@ -13,7 +13,7 @@ import React, { Component } from 'react';
  */
 
 import { 
-  Paper,
+  Paper, Typography, Divider, Grid,
 
 } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
@@ -22,6 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 const palette = require('../configs/palette.json');
+const geometry = require('../configs/geometry.json');
 
 export default class FeedCard extends Component {
 
@@ -51,11 +52,16 @@ export default class FeedCard extends Component {
   }
 
   render() {
-    const Margin = 5;
-    const ItemHeight = 280;
+    const marginLeft = geometry.feedcard.margin.left;
+    const marginTop = geometry.feedcard.margin.top;
+    const height = geometry.feedcard.height;
+    const padding = geometry.feedcard.padding;
+    const style = this.state.style;
+    const feedCardTextTheme = palette.text.feedcard;
+    const feedCardIconTheme = palette.icons.feedcard;
 
     const categories = this.state.categories;
-    let style = this.state.style;
+    
 
     return (
       <Paper
@@ -63,16 +69,47 @@ export default class FeedCard extends Component {
         variant="elevation"
         style={{
           ...style,
-          left: style.left + Margin,
-          top: style.top + Margin,
-          width: style.width - Margin,
-          height: ItemHeight - Margin,
-          backgroundColor: palette.mui.background.post
+          left: style.left + marginLeft,
+          top: style.top + marginTop,
+          width: style.width - marginLeft,
+          height: height - marginTop,
+          backgroundColor: palette.mui.background.post,
+          padding: padding
         }}
       >
-        {/* Author, Date, Link */}
-
         {/* Title */}
+        <Typography
+          variant="h6"
+          align="center"
+          style={{
+            color: feedCardTextTheme.title,
+            fontWeight: "normal",
+            paddingBottom: padding
+          }}
+        >
+          { this.state.title }
+        </Typography>
+        <Divider />
+
+        {/* Author, Date, Link */}
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid item>
+            <Typography>
+              { 'By ' + this.state.author }
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography>
+              { '@' + this.state.date }
+            </Typography>
+          </Grid>
+        </Grid>
+
 
         {/* Categories, Comments, Content */}
 
