@@ -46,17 +46,15 @@ export default class MainFeedPage extends Component {
       };
       this.setState({ feeds });
 
-      parser.parseURL(CORS + feedInfo.rss)
-      .catch(err => {
-        console.error(err);
-      })
-      .then(feed => {
+      parser.parseURL(CORS + feedInfo.rss, (err, feed) => {
+        if (err) {
+          throw err;
+        }
         // Process each item before rendering
         feed.items.forEach(item => {
           this.processItem(feedInfo, item);
         });
       });
-      return null;
     });
   }
 
