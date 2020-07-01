@@ -6,10 +6,10 @@ import {
 } from '@material-ui/core';
 import 'typeface-muli';
 import MainFeedPage from './components/MainFeedPage';
-const palette = require('./configs/palette.json').palette;
+const palette = require('./configs/palette.json');
 
 const theme = createMuiTheme({
-  palette: palette,
+  palette: palette.mui,
   typography: {
     fontFamily: 'Muli',
   }

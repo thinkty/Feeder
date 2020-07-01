@@ -67,11 +67,9 @@ export default class FeedCard extends Component {
           top: style.top + Margin,
           width: style.width - Margin,
           height: ItemHeight - Margin,
-          backgroundColor: palette.palette.background.post
+          backgroundColor: palette.mui.background.post
         }}
       >
-        
-      
         {/* Author, Date, Link */}
 
         {/* Title */}

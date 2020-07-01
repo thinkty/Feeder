@@ -14,6 +14,8 @@ import {
 import { FixedSizeList as List } from 'react-window';
 import FeedCard from './FeedCard';
 
+const palette = require('../configs/palette.json');
+
 export default class FeedContainer extends Component {
 
   constructor(props) {
@@ -69,6 +71,7 @@ export default class FeedContainer extends Component {
     const Height = 300;
     const Width = this.state.windowWidth - 60;
     const ItemWidth = 300;
+    const feedTheme = palette.text.feed;
 
     return (
       <Grid item>
@@ -81,7 +84,9 @@ export default class FeedContainer extends Component {
         >
           <Grid item>
             <Typography
-              color="textPrimary"
+              style={{
+                color: feedTheme.title
+              }}
             >
               { feedInfo.name }
             </Typography>
@@ -89,7 +94,9 @@ export default class FeedContainer extends Component {
           <Grid item>
             <Typography
               variant="body2"
-              color="textSecondary"
+              style={{
+                color: feedTheme.group
+              }}
             >
               { feedInfo.group }
             </Typography>
@@ -97,8 +104,10 @@ export default class FeedContainer extends Component {
         </Grid>
         <Typography
           variant="body2"
-          color="textSecondary"
-          gutterBottom
+          style={{
+            color: feedTheme.desc,
+            marginBottom: "10px"
+          }}
         >
           { '- ' + feedInfo.desc }
         </Typography>

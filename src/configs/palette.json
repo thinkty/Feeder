@@ -8,8 +8,10 @@
   },
   "text" : {
     "header": "#b94220",
-    "feedtitle": "#fdfdfc",
-    "feedcategory": "#8b96a4",
-    "feeddesc": "#8b96a4"
+    "feed": {
+      "title": "#fdfdfc",
+      "group": "#8b96a4",
+      "desc": "#8b96a4"
+    }
   }
 }

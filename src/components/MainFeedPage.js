@@ -12,6 +12,7 @@ import FeedContainer from './FeedContainer';
 const feedlist = require('../configs/feedlist.json');
 const Parser = require('rss-parser');
 const CORS = 'https://private-cors-anywhere.herokuapp.com/';
+const palette = require('../configs/palette.json');
 
 export default class MainFeedPage extends Component {
 
@@ -110,11 +111,11 @@ export default class MainFeedPage extends Component {
       <div>
         <Typography
           variant="h3"
-          color="secondary"
           style={{
             marginTop: '100px',
             marginBottom: '50px',
             fontWeight: 'bold',
+            color: palette.text.header
           }}
         >
           <Box
