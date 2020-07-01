@@ -15,16 +15,18 @@
     },
     "feedcard": {
       "title": "#fdfdfc",
-      "author": "",
-      "date": "",
-      "categories": ""
+      "author": "#8b96a4",
+      "date": "#8b96a4",
+      "categories": "#fdfdfc",
+      "comments": "#fdfdfc"
     }
   },
   "icons": {
     "feedcard": {
-      "categories": "",
-      "comments": "",
-      "content": ""
+      "categories": "#8b96a4",
+      "comments": "#8b96a4",
+      "content": "#8b96a4",
+      "link": "#8b96a4"
     }
   }
 }

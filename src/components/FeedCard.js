@@ -13,13 +13,11 @@ import React, { Component } from 'react';
  */
 
 import { 
-  Paper, Typography, Divider, Grid,
+  Paper, Typography, Divider, Grid, Chip, Button, IconButton, Tooltip,
 
 } from '@material-ui/core';
+import SubjectIcon from '@material-ui/icons/Subject';
 import LinkIcon from '@material-ui/icons/Link';
-import ChatIcon from '@material-ui/icons/Chat';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 const palette = require('../configs/palette.json');
 const geometry = require('../configs/geometry.json');
@@ -61,60 +59,152 @@ export default class FeedCard extends Component {
     const feedCardIconTheme = palette.icons.feedcard;
 
     const categories = this.state.categories;
-    
+    const comments = this.state.comments;
 
     return (
-      <Paper
-        elevation={20}
-        variant="elevation"
-        style={{
-          ...style,
-          left: style.left + marginLeft,
-          top: style.top + marginTop,
-          width: style.width - marginLeft,
-          height: height - marginTop,
-          backgroundColor: palette.mui.background.post,
-          padding: padding
-        }}
-      >
-        {/* Title */}
-        <Typography
-          variant="h6"
-          align="center"
+      <div>
+        <Paper
+          elevation={20}
+          variant="elevation"
           style={{
-            color: feedCardTextTheme.title,
-            fontWeight: "normal",
-            paddingBottom: padding
+            ...style,
+            left: style.left + marginLeft,
+            top: style.top + marginTop,
+            width: style.width - marginLeft,
+            height: height - marginTop,
+            backgroundColor: palette.mui.background.post,
+            padding: padding
           }}
         >
-          { this.state.title }
-        </Typography>
-        <Divider />
+          {/* Title */}
+          <Typography
+            variant="h6"
+            align="center"
+            style={{
+              color: feedCardTextTheme.title,
+              fontWeight: "normal",
+              paddingBottom: padding*2
+            }}
+          >
+            { this.state.title }
+          </Typography>
 
-        {/* Author, Date, Link */}
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
-          <Grid item>
-            <Typography>
-              { 'By ' + this.state.author }
-            </Typography>
+          {/* Author, Date */}
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={1}
+          >
+            <Grid item>
+              <Typography
+                variant="body2"
+                style={{
+                  color: feedCardTextTheme.author
+                }}
+              >
+                { 'By ' + this.state.author }
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography
+                variant="body2"
+                style={{
+                  color: feedCardTextTheme.date
+                }}
+              >
+                { '@ ' + this.state.date }
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Typography>
-              { '@' + this.state.date }
-            </Typography>
+          <Divider 
+            style={{
+              margin: padding
+            }}
+          />
+
+          {/* Content, Link */}
+          <Grid
+            container
+            direction="row"
+            justify="space-evenly"
+            alignItems="center"
+          >
+            <Grid item>
+              <Tooltip title="See content">
+                <IconButton>
+                  <SubjectIcon 
+                    style={{
+                      color: feedCardIconTheme.content
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <Tooltip title="Go to source">
+                <IconButton>
+                  <LinkIcon 
+                    style={{
+                      color: feedCardIconTheme.link
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
+            </Grid>
           </Grid>
-        </Grid>
 
+          {/* Categories */}
+          { 
+            categories &&
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={1}
+            >
+              {
+                categories.map((category) => (
+                  <Grid 
+                    item
+                    key={category}
+                  >
+                    <Chip 
+                      size="small"
+                      label={category}
+                      style={{
+                        color: feedCardTextTheme.categories,
+                        backgroundColor: feedCardIconTheme.categories
+                      }}
+                    />
+                  </Grid>
+                ))
+              }
+            </Grid>
+          }
 
-        {/* Categories, Comments, Content */}
+          {/* Comments */}
+          {
+            comments &&
+            <Button
+              variant="outlined"
+              href={comments}
+              style={{
+                width: "100%",
+                color: feedCardTextTheme.comments,
+                backgroundColor: feedCardIconTheme.comments
+              }}
+            >
+              See Comments
+            </Button>
+          }
+        </Paper>
 
-        {/* Content */}
-      </Paper>
+        {/* Content Dialog */}
+
+      </div>
     );
   }
 }
