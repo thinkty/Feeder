@@ -34,6 +34,7 @@ export default class MainFeedPage extends Component {
 
     // Check if it is connected to internet
     if (!navigator.onLine) {
+      // TODO: Read from localStorage
       return;
     }
 
