@@ -1,19 +1,15 @@
 {
-  "palette": {
+  "mui" :{
     "background": {
       "default": "#1f2d42",
       "paper": "#344452",
       "post": "fdfdfc"
-    },
-    "primary": {
-      "main": "#344452"
-    },
-    "secondary": {
-      "main": "#b94220"
-    },
-    "text": {
-      "primary": "#fdfdfc",
-      "secondary": "#8b96a4"
     }
+  },
+  "text" : {
+    "header": "#b94220",
+    "feedtitle": "#fdfdfc",
+    "feedcategory": "#8b96a4",
+    "feeddesc": "#8b96a4"
   }
 }
