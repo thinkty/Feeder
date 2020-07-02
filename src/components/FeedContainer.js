@@ -8,8 +8,7 @@ import React, { Component } from 'react';
 import { 
   Paper,
   Grid,
-  Typography,
-  ListItem,
+  Typography
 } from '@material-ui/core';
 import { FixedSizeList as List } from 'react-window';
 import FeedCard from './FeedCard';
@@ -22,6 +21,7 @@ export default class FeedContainer extends Component {
     super(props);
     this.state = {
       feed: this.props.feed,
+      loadDone: this.props.loadDone,
       windowWidth: window.innerWidth
     };
   }
@@ -35,6 +35,18 @@ export default class FeedContainer extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth);
+  }
+
+  /**
+   * Only update on two cases, 
+   * when feed has been updated and
+   * when windowWidth has changed
+   */ 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state.windowWidth !== nextState.windowWidth ||
+      nextProps.loadDone !== this.state.loadDone
+    );
   }
 
   /**

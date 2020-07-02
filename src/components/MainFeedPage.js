@@ -19,7 +19,8 @@ export default class MainFeedPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      feeds: {}
+      feeds: {},
+      loadDone: false
     };
 
   }
@@ -56,6 +57,12 @@ export default class MainFeedPage extends Component {
         feed.items.forEach(item => {
           this.processItem(feedInfo, item);
         });
+
+        // Notify that all items have been processed
+        this.setState({
+          loadDone: true
+        });
+        console.log('Completed Loading Feeds')
       });
     });
   }
@@ -142,6 +149,7 @@ export default class MainFeedPage extends Component {
                 <FeedContainer 
                   key={feed}
                   feed={feeds[feed]}
+                  loadDone={this.state.loadDone}
                 />
               );
             })
