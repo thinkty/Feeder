@@ -8,7 +8,8 @@ import React, { Component } from 'react';
 import { 
   Paper,
   Grid,
-  Typography
+  Typography,
+  CircularProgress
 } from '@material-ui/core';
 import { FixedSizeList as List } from 'react-window';
 import FeedCard from './FeedCard';

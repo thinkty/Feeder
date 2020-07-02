@@ -62,7 +62,6 @@ export default class MainFeedPage extends Component {
         this.setState({
           loadDone: true
         });
-        console.log('Completed Loading Feeds')
       });
     });
   }
