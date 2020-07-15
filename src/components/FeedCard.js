@@ -13,17 +13,14 @@ import React, { Component } from 'react';
  */
 
 import { 
-  Paper, 
-  Typography, 
-  Divider, 
-  Grid, 
-  Chip, 
-  IconButton, 
-  Tooltip
+  Paper,
+  Typography,
+  Grid,
+  IconButton,
 } from '@material-ui/core';
-import SubjectIcon from '@material-ui/icons/Subject';
-import CommentIcon from '@material-ui/icons/Comment';
-import LinkIcon from '@material-ui/icons/Link';
+import FeedCardTitle from './FeedCardTitle';
+import FeedCardAuthorAndDate from './FeedCardAuthorAndDate';
+import FeedCardActions from './FeedCardActions';
 
 const palette = require('../configs/palette.json');
 const geometry = require('../configs/geometry.json');
@@ -45,12 +42,6 @@ export default class FeedCard extends Component {
     };
   }
 
-  // Performance optimization
-  shouldComponentUpdate(nextProps, nextState) {
-    // This component will never need to be re-rendered
-    return false;
-  }
-
   /**
    * Handler to show/hide contents of the feed
    */
@@ -66,6 +57,7 @@ export default class FeedCard extends Component {
       openContent: true
     });
   }
+  
   closeContentDialog = () => {
     this.setState({
       openContent: false
@@ -74,13 +66,8 @@ export default class FeedCard extends Component {
 
   render() {
 
-    const {style, comments, content, link} = this.state;
-    const marginLeft = geometry.feedcard.margin.left;
-    const marginTop = geometry.feedcard.margin.top;
-    const height = geometry.feedcard.height;
-    const padding = geometry.feedcard.padding;
-    const feedCardTextTheme = palette.text.feedcard;
-    const feedCardIconTheme = palette.icons.feedcard;
+    const { style } = this.state;
+    const { margin, height, padding } = geometry.feedcard;
 
     return (
       <div>
@@ -89,13 +76,12 @@ export default class FeedCard extends Component {
           variant="elevation"
           style={{
             ...style,
-            left: style.left + marginLeft,
-            top: style.top + marginTop,
+            left: style.left + margin.left,
+            top: style.top + margin.top,
             width: '98%',
-            height: height - marginTop,
+            height: height - margin.top,
             backgroundColor: palette.mui.background.post,
-            paddingTop: padding,
-            paddingLeft: padding
+            padding: `${padding}px ${padding}px 0px ${padding}px`
           }}
         >
           <Grid
@@ -104,24 +90,9 @@ export default class FeedCard extends Component {
             justify="center"
             alignItems="flex-start"
           >
-            <Grid 
-              item
-              xs={12}  
-            >
-              {/* Title */}
-              <Typography
-                variant="body1"
-                noWrap
-                gutterBottom
-                style={{
-                  color: feedCardTextTheme.title,
-                  fontWeight: "normal",
-                }}
-              >
-                { this.state.title }
-              </Typography>
+            <Grid item xs={12}>
+              <FeedCardTitle title={this.state.title}/>
             </Grid>
-
             <Grid
               item
               container
@@ -129,86 +100,20 @@ export default class FeedCard extends Component {
               justify="space-between"
               alignItems="center"
             >
-              {/* Author, Date */}
-              <Grid
-                item
-                xs={9}
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                spacing={1}
-              >
-                <Grid item>
-                  <Typography
-                    variant="body2"
-                    style={{
-                      color: feedCardTextTheme.author
-                    }}
-                  >
-                    { 'By ' + this.state.author }
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    variant="body2"
-                    noWrap
-                    style={{
-                      color: feedCardTextTheme.date
-                    }}
-                  >
-                    { '@ ' + this.state.date }
-                  </Typography>
-                </Grid>
+              <Grid item xs={8}>
+                <FeedCardAuthorAndDate 
+                  date={this.state.date} 
+                  author={this.state.author}
+                />
               </Grid>
                           
               {/* Content, Link, Comments */}
-              <Grid
-                item
-                xs={3}
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="center"
-              >
-                <Grid item>
-                  <IconButton
-                    size="small"
-                  >
-                    <SubjectIcon 
-                      style={{
-                        color: feedCardIconTheme.content
-                      }}
-                    />
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <IconButton
-                    href={link}
-                    size="small"
-                  >
-                    <LinkIcon 
-                      style={{
-                        color: feedCardIconTheme.link
-                      }}
-                    />
-                  </IconButton>
-                </Grid>
-                {
-                  comments &&
-                  <Grid item>
-                    <IconButton
-                      href={comments}
-                      size="small"
-                    >
-                      <CommentIcon
-                        style={{
-                          color: feedCardIconTheme.comments
-                        }}
-                      />
-                    </IconButton>
-                  </Grid>
-                }
+              <Grid item xs={4}>
+                <FeedCardActions 
+                  comments={this.state.comments}
+                  content={this.state.content}
+                  link={this.state.link}
+                />
               </Grid>
             </Grid>
           </Grid>
