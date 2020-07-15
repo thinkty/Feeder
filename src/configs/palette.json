@@ -17,8 +17,7 @@
     },
     "feedcard": {
       "title": "#fdfdfc",
-      "author": "#8b96a4",
-      "date": "#8b96a4",
+      "authorAndDate": "#8b96a4",
       "categories": "#fdfdfc"
     }
   },
