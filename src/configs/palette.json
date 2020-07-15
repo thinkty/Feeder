@@ -2,11 +2,13 @@
   "mui": {
     "background": {
       "default": "#1f2d42",
-      "paper": "#344452",
-      "post": "fdfdfc"
+      "paper": "#1f2d42",
+      "post": "#344452"
     }
   },
   "text": {
+    "main": "#fdfdfc",
+    "sub": "#8b96a4",
     "header": "#b94220",
     "feed": {
       "title": "#fdfdfc",

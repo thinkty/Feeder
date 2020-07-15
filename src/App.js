@@ -12,6 +12,16 @@ const theme = createMuiTheme({
   palette: palette.mui,
   typography: {
     fontFamily: 'Muli',
+  },
+  overrides: {
+    MuiSelect: {
+      root: {
+        color: '#fff'
+      },
+      select: {
+        color: '#fff'
+      }
+    }
   }
 });
 

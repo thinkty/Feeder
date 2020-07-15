@@ -15,6 +15,7 @@ import { FixedSizeList as List } from 'react-window';
 import FeedCard from './FeedCard';
 
 const palette = require('../configs/palette.json');
+const geometry = require('../configs/geometry.json');
 
 export default class FeedContainer extends Component {
 
@@ -22,7 +23,6 @@ export default class FeedContainer extends Component {
     super(props);
     this.state = {
       feed: this.props.feed,
-      loadDone: this.props.loadDone,
       windowWidth: window.innerWidth
     };
   }
@@ -38,24 +38,46 @@ export default class FeedContainer extends Component {
     window.removeEventListener('resize', this.updateWindowWidth);
   }
 
-  /**
-   * Only update on two cases, 
-   * when feed has been updated and
-   * when windowWidth has changed
-   */ 
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.state.windowWidth !== nextState.windowWidth ||
-      nextProps.loadDone !== this.state.loadDone
-    );
+  componentDidUpdate() {
+
+    const propsFeed = this.props.feed;
+
+    if (propsFeed !== undefined) {
+
+      const feed = this.state.feed;
+
+      // Update if feed is yet undefined
+      if (feed === undefined) {
+        this.setState({
+          feed: propsFeed
+        });
+        return;
+      }
+
+      // If feed is not undefined, update only if contents change
+      // which will probably not happen
+      if (propsFeed.posts.length !== feed.posts.length) {
+        this.setState({
+          feed: propsFeed
+        });
+        return;
+      }
+    }
   }
 
   /**
    * Method to update window width on change
    */
   updateWindowWidth = () => {
+
+    let width = window.innerWidth;
+
+    if (width > geometry.feedcontainer.width.max) {
+      width = geometry.feedcontainer.width.max;
+    }
+
     this.setState({
-      windowWidth: window.innerWidth
+      windowWidth: width
     });
   }
 
@@ -78,80 +100,54 @@ export default class FeedContainer extends Component {
   }
 
   render() {
+
+    // Initially, before fetching feed data, feed is undefined
     const feed = this.state.feed;
+    if (!feed) {
+      return (
+        <div/>
+      );
+    }
+
     const feedInfo = feed.feedInfo;
-    const items = feed.items;
-    const Height = 300;
-    const Width = this.state.windowWidth - 60;
-    const ItemWidth = 300;
+    const posts = feed.posts;
+
+    const Height = window.innerHeight - 320;
+    const Width = this.state.windowWidth - 20;
+    const ItemHeight = geometry.feedcard.height;
     const feedTheme = palette.text.feed;
 
     return (
-      <Grid item>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-end"
-          spacing={1}
-        >
-          <Grid item>
-            <Typography
-              style={{
-                color: feedTheme.title
-              }}
-            >
-              { feedInfo.name }
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="body2"
-              style={{
-                color: feedTheme.group
-              }}
-            >
-              { feedInfo.group }
-            </Typography>
-          </Grid>
-        </Grid>
+      <div>
         <Typography
           variant="body2"
           style={{
             color: feedTheme.desc,
-            marginBottom: "10px"
+            margin: 20
           }}
+          align="center"
         >
-          { '- ' + feedInfo.desc }
+          { feedInfo.desc }
         </Typography>
 
-        <Paper 
-          elevation={0}
-          variant="outlined"
-          style={{
-            height: Height,
-            width: Width
-          }}
+        <List
+          layout="vertical"
+          height={Height}
+          width={Width}
+          itemCount={posts.length}
+          itemSize={ItemHeight}
         >
-          <List
-            height={Height}
-            width={Width}
-            itemCount={items.length}
-            itemSize={ItemWidth}
-            layout="horizontal"
-          >
-            {({index, style}) => {
-              const item = items[index];
-              return (
-                <FeedCard 
-                  item={item}
-                  style={style}
-                />
-              );
-            }}
-          </List>
-        </Paper>
-      </Grid>
+          {({index, style}) => {
+            const item = posts[index];
+            return (
+              <FeedCard 
+                item={item}
+                style={style}
+              />
+            );
+          }}
+        </List>
+      </div>
     )
   }
 }

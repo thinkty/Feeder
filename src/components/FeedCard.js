@@ -73,18 +73,14 @@ export default class FeedCard extends Component {
   }
 
   render() {
+
+    const {style, comments, content, link} = this.state;
     const marginLeft = geometry.feedcard.margin.left;
     const marginTop = geometry.feedcard.margin.top;
     const height = geometry.feedcard.height;
     const padding = geometry.feedcard.padding;
-    const style = this.state.style;
     const feedCardTextTheme = palette.text.feedcard;
     const feedCardIconTheme = palette.icons.feedcard;
-
-    const categories = this.state.categories;
-    const comments = this.state.comments;
-    const content = this.state.content;
-    const link = this.state.link;
 
     return (
       <div>
@@ -95,68 +91,51 @@ export default class FeedCard extends Component {
             ...style,
             left: style.left + marginLeft,
             top: style.top + marginTop,
-            width: style.width - marginLeft,
+            width: '98%',
             height: height - marginTop,
             backgroundColor: palette.mui.background.post,
-            padding: padding
+            paddingTop: padding,
+            paddingLeft: padding
           }}
         >
           <Grid
             container
             direction="column"
-            justify="space-between"
-            alignItems="center"
+            justify="center"
+            alignItems="flex-start"
           >
-            <Grid item>
+            <Grid 
+              item
+              xs={12}  
+            >
               {/* Title */}
               <Typography
-                variant="h6"
-                align="center"
+                variant="body1"
+                noWrap
+                gutterBottom
                 style={{
                   color: feedCardTextTheme.title,
                   fontWeight: "normal",
-                  paddingBottom: padding*2
                 }}
               >
                 { this.state.title }
               </Typography>
+            </Grid>
 
-              {/* Categories */}
-              { 
-                categories &&
-                <Grid
-                  item
-                  container
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                  spacing={1}
-                >
-                  {
-                    categories.map((category) => (
-                      <Grid 
-                        item
-                        key={category}
-                      >
-                        <Chip 
-                          size="small"
-                          label={category}
-                          style={{
-                            color: feedCardTextTheme.categories,
-                            backgroundColor: feedCardIconTheme.categories
-                          }}
-                        />
-                      </Grid>
-                    ))
-                  }
-                </Grid>
-              }
-
+            <Grid
+              item
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
               {/* Author, Date */}
               <Grid
+                item
+                xs={9}
                 container
                 direction="row"
-                justify="center"
+                justify="flex-start"
                 alignItems="center"
                 spacing={1}
               >
@@ -173,6 +152,7 @@ export default class FeedCard extends Component {
                 <Grid item>
                   <Typography
                     variant="body2"
+                    noWrap
                     style={{
                       color: feedCardTextTheme.date
                     }}
@@ -181,36 +161,31 @@ export default class FeedCard extends Component {
                   </Typography>
                 </Grid>
               </Grid>
-              <Divider 
-                style={{
-                  margin: padding
-                }}
-              />
-            </Grid>
-
-            {/* Content, Link, Comments */}
-            <Grid
-              item
-              container
-              direction="row"
-              justify="space-evenly"
-              alignItems="center"
-            >
-              <Grid item>
-                <Tooltip title="See content">
-                  <IconButton>
+                          
+              {/* Content, Link, Comments */}
+              <Grid
+                item
+                xs={3}
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="center"
+              >
+                <Grid item>
+                  <IconButton
+                    size="small"
+                  >
                     <SubjectIcon 
                       style={{
                         color: feedCardIconTheme.content
                       }}
                     />
                   </IconButton>
-                </Tooltip>
-              </Grid>
-              <Grid item>
-                <Tooltip title="Go to source">
+                </Grid>
+                <Grid item>
                   <IconButton
                     href={link}
+                    size="small"
                   >
                     <LinkIcon 
                       style={{
@@ -218,14 +193,13 @@ export default class FeedCard extends Component {
                       }}
                     />
                   </IconButton>
-                </Tooltip>
-              </Grid>
-              {
-                comments &&
-                <Grid item>
-                  <Tooltip title="See Comments">
+                </Grid>
+                {
+                  comments &&
+                  <Grid item>
                     <IconButton
                       href={comments}
+                      size="small"
                     >
                       <CommentIcon
                         style={{
@@ -233,9 +207,9 @@ export default class FeedCard extends Component {
                         }}
                       />
                     </IconButton>
-                  </Tooltip>
-                </Grid>
-              }
+                  </Grid>
+                }
+              </Grid>
             </Grid>
           </Grid>
         </Paper>

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { 
-  Grid, Typography, Box 
+import {
+  Grid,
+  Typography,
+  Box,
+  FormControl,
+  Select
 } from '@material-ui/core';
 import { 
   checkItem, 
@@ -20,7 +24,7 @@ export default class MainFeedPage extends Component {
     super(props);
     this.state = {
       feeds: {},
-      loadDone: false
+      selected: null
     };
 
   }
@@ -31,7 +35,7 @@ export default class MainFeedPage extends Component {
    * local storage.
    */
   componentDidMount() {
-    let parser = new Parser();
+    
     let feeds = this.state.feeds;
 
     // Check if it is connected to internet
@@ -40,29 +44,37 @@ export default class MainFeedPage extends Component {
       return;
     }
 
-    feedlist.feeds.map(async feedInfo => {
+    let parser = new Parser();
+    let first = true;
+    feedlist.feeds.forEach(feedInfo => {
 
-      // Add the feed information to state
-      feeds[feedInfo.name] = {
-        feedInfo,
-        items: []
-      };
-      this.setState({ feeds });
+      parser.parseURL(CORS + feedInfo.rss)
+      .then(res => {
+        let posts = [];
+        res.items.forEach(item => {
+          const temp = this.processItem(item);
+          if (temp != null) {
+            posts.push(temp);
+          }
+        });
 
-      parser.parseURL(CORS + feedInfo.rss, (err, feed) => {
-        if (err) {
-          throw err;
+        feeds[feedInfo.name] = {
+          feedInfo,
+          posts
         }
-        // Process each item before rendering
-        feed.items.forEach(item => {
-          this.processItem(feedInfo, item);
-        });
+        this.setState({ feeds });
 
-        // Notify that all items have been processed
-        this.setState({
-          loadDone: true
-        });
-      });
+        if (first) {
+          first = false;
+          this.setState({
+            selected: feedInfo.name
+          });
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        // TODO: Error handling
+      })
     });
   }
 
@@ -81,80 +93,109 @@ export default class MainFeedPage extends Component {
   }
 
   /**
-   * Method to validate the item and push it to
-   * the props. 
+   * Method to validate the item and push it to the props. 
    * 
-   * @param {*} feedInfo Information about the feed
-   * @param {*} item Item read from the RSS feed
+   * @param {Object} item Item read from the RSS feed
+   * @returns {Object} Processed item on success, or null on error
    */
-  processItem = (feedInfo, item) => {
+  processItem = (item) => {
 
+    // Check the required fields
     if (!checkItem(item)) {
-      return;
+      return null;
     }
 
+    // Some posts have `creator` instead of an author
     let authorizedItem = checkAuthor(item);
     if (authorizedItem == null) {
-      return;
+      return null;
     }
 
     authorizedItem.date = parseDate(authorizedItem.pubDate);
+    return authorizedItem;
+  }
 
-    // Push the item to correct feeds
-    let feeds = this.state.feeds;
-    feeds[feedInfo.name].items.push(authorizedItem);
-    this.setState({ feeds });
-
-    // Save to local storage
-    localStorage.setItem('feeds', JSON.stringify(feeds));
+  /**
+   * Method to update the currently selected feed
+   * 
+   * @param {Object} event Event on selected changed
+   */
+  onSelectedChange = (event) => {
+    this.setState({
+      selected: event.target.value
+    });
   }
 
 
   render() {
-    const feeds = this.state.feeds;
+    const {
+      feeds,
+      selected
+    } = this.state;
 
     return (
-      <div>
-        <Typography
-          variant="h3"
-          style={{
-            marginTop: '100px',
-            marginBottom: '50px',
-            fontWeight: 'bold',
-            color: palette.text.header
-          }}
-        >
-          <Box
-            textAlign="center"
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid item>
+          <Typography
+            variant="h3"
+            style={{
+              marginTop: '100px',
+              marginBottom: '50px',
+              fontWeight: 'bold',
+              color: palette.text.header
+            }}
           >
-            Feeder.
-          </Box>
-        </Typography>
-
-        <Grid
-          container
-          direction="column"
-          justify="flex-start"
-          alignItems="center"
-          spacing={3}
-          style={{
-            margin: 0,
-            width: '100%'
-          }}
-        >
-          {
-            Object.keys(feeds).map(feed => {
-              return (
-                <FeedContainer 
-                  key={feed}
-                  feed={feeds[feed]}
-                  loadDone={this.state.loadDone}
-                />
-              );
-            })
-          }
+            <Box
+              textAlign="center"
+            >
+              Feeder.
+            </Box>
+          </Typography>
         </Grid>
-      </div>
+        {
+          selected &&
+          <Grid item>
+            <FormControl>
+              <Select
+                native
+                value={selected}
+                onChange={this.onSelectedChange}
+                style={{
+                  width: '200px',
+                  color: palette.text.main,
+                  backgroundColor: '#344452'
+                }}
+              >
+                {
+                  Object.keys(feeds).map(name => {
+                    return (
+                      <option
+                        key={name}
+                        value={name}
+                        style={{
+                          color: '#8b96a4'
+                        }}
+                      >
+                        {name}
+                      </option>
+                    );
+                  })
+                }
+              </Select>
+            </FormControl>
+          </Grid>
+        }
+        <Grid item>
+          <FeedContainer 
+            feed={feeds[selected]}
+          />
+        </Grid>
+      </Grid>
     )
   }
 }
