@@ -5,11 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import { 
-  Paper,
-  Grid,
+import {
   Typography,
-  CircularProgress
 } from '@material-ui/core';
 import { FixedSizeList as List } from 'react-window';
 import FeedCard from './FeedCard';
@@ -27,39 +24,27 @@ export default class FeedContainer extends Component {
     };
   }
 
-  /**
-   * Update window size
-   */
   componentDidMount() {
     this.updateWindowWidth();
     window.addEventListener('resize', this.updateWindowWidth);
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth);
   }
 
   componentDidUpdate() {
+    const { feed } = this.props;
 
-    const propsFeed = this.props.feed;
+    if (feed !== undefined) {
 
-    if (propsFeed !== undefined) {
-
-      const feed = this.state.feed;
-
-      // Update if feed is yet undefined
-      if (feed === undefined) {
-        this.setState({
-          feed: propsFeed
-        });
-        return;
-      }
-
-      // If feed is not undefined, update only if contents change
-      // which will probably not happen
-      if (propsFeed.posts.length !== feed.posts.length) {
-        this.setState({
-          feed: propsFeed
-        });
+      // Update if feed is yet undefined OR
+      // contents of the feed has changed (which will not happen)
+      if (
+        this.state.feed === undefined ||
+        feed.posts.length !== this.state.feed.posts.length
+      ) {
+        this.setState({ feed });
         return;
       }
     }
@@ -69,16 +54,9 @@ export default class FeedContainer extends Component {
    * Method to update window width on change
    */
   updateWindowWidth = () => {
-
-    let width = window.innerWidth;
-
-    if (width > geometry.feedcontainer.width.max) {
-      width = geometry.feedcontainer.width.max;
-    }
-
-    this.setState({
-      windowWidth: width
-    });
+    const { max } = geometry.feedcontainer.width;
+    const windowWidth = Math.min(window.innerWidth, max);
+    this.setState({ windowWidth });
   }
 
   /**
@@ -102,40 +80,33 @@ export default class FeedContainer extends Component {
   render() {
 
     // Initially, before fetching feed data, feed is undefined
-    const feed = this.state.feed;
-    if (!feed) {
-      return (
-        <div/>
-      );
+    if (!this.state.feed) {
+      return (<div/>);
     }
 
-    const feedInfo = feed.feedInfo;
-    const posts = feed.posts;
-
+    // 320 has been calculated regarding the height of the previous elements
     const Height = window.innerHeight - 320;
-    const Width = this.state.windowWidth - 20;
-    const ItemHeight = geometry.feedcard.height;
-    const feedTheme = palette.text.feed;
+    const Width = this.state.windowWidth - geometry.feedcontainer.margin;
+    const { feedInfo, posts } = this.state.feed;
 
     return (
       <div>
         <Typography
           variant="body2"
           style={{
-            color: feedTheme.desc,
-            margin: 20
+            color: palette.text.feed.desc,
+            margin: geometry.feedcontainer.margin
           }}
           align="center"
         >
           { feedInfo.desc }
         </Typography>
-
         <List
           layout="vertical"
           height={Height}
           width={Width}
           itemCount={posts.length}
-          itemSize={ItemHeight}
+          itemSize={geometry.feedcard.height}
         >
           {({index, style}) => {
             const item = posts[index];
