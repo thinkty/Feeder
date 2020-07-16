@@ -14,9 +14,7 @@ import React, { Component } from 'react';
 
 import { 
   Paper,
-  Typography,
   Grid,
-  IconButton,
 } from '@material-ui/core';
 import FeedCardTitle from './FeedCardTitle';
 import FeedCardAuthorAndDate from './FeedCardAuthorAndDate';
@@ -106,8 +104,6 @@ export default class FeedCard extends Component {
                   author={this.state.author}
                 />
               </Grid>
-                          
-              {/* Content, Link, Comments */}
               <Grid item xs={4}>
                 <FeedCardActions 
                   comments={this.state.comments}
