@@ -16,12 +16,12 @@ import {
   Paper,
   Grid,
 } from '@material-ui/core';
-import FeedCardTitle from './FeedCardTitle';
-import FeedCardAuthorAndDate from './FeedCardAuthorAndDate';
-import FeedCardActions from './FeedCardActions';
+import FeedCardTitle from '../FeedCardTitle';
+import FeedCardAuthorAndDate from '../FeedCardAuthorAndDate';
+import FeedCardActions from '../FeedCardActions';
 
-const palette = require('../configs/palette.json');
-const geometry = require('../configs/geometry.json');
+const palette = require('../../configs/palette.json');
+const geometry = require('../../configs/geometry.json');
 
 export default class FeedCard extends Component {
 

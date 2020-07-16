@@ -9,10 +9,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import { FixedSizeList as List } from 'react-window';
-import FeedCard from './FeedCard';
+import FeedCard from '../FeedCard/FeedCard';
 
-const palette = require('../configs/palette.json');
-const geometry = require('../configs/geometry.json');
+const palette = require('../../configs/palette.json');
+const geometry = require('../../configs/geometry.json');
 
 export default class FeedContainer extends Component {
 

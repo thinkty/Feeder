@@ -10,13 +10,13 @@ import {
   checkItem, 
   checkAuthor,
   parseDate
-} from '../utils/FeedParser';
-import FeedContainer from './FeedContainer';
+} from '../../utils/FeedParser';
+import FeedContainer from '../FeedContainer/FeedContainer';
 
-const feedlist = require('../configs/feedlist.json');
+const feedlist = require('../../configs/feedlist.json');
 const Parser = require('rss-parser');
 const CORS = 'https://private-cors-anywhere.herokuapp.com/';
-const palette = require('../configs/palette.json');
+const palette = require('../../configs/palette.json');
 
 export default class MainFeedPage extends Component {
 
