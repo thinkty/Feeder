@@ -7,7 +7,7 @@ import SubjectIcon from '@material-ui/icons/Subject';
 import CommentIcon from '@material-ui/icons/Comment';
 import LinkIcon from '@material-ui/icons/Link';
 
-const palette = require('../configs/palette.json');
+const palette = require('../../configs/palette.json');
 
 export default class FeedCardActions extends Component {
 

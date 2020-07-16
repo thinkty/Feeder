@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Typography } from '@material-ui/core';
-const palette = require('../configs/palette.json');
+const palette = require('../../configs/palette.json');
 
 export default class FeedCardAuthorAndDate extends Component {
 
