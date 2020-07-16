@@ -1,7 +1,16 @@
 
 import React, { PureComponent } from 'react';
-import { IconButton, Grid } from '@material-ui/core';
-import SubjectIcon from '@material-ui/icons/Subject';
+import {
+  IconButton,
+  Grid,
+  Dialog,
+  List,
+  ListItem,
+  Avatar,
+  ListItemAvatar,
+  ListItemText
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import CommentIcon from '@material-ui/icons/Comment';
 import LinkIcon from '@material-ui/icons/Link';
 
@@ -12,49 +21,110 @@ export default class FeedCardActions extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      height: this.props.height,
       comments: this.props.comments,
-      link: this.props.link
+      link: this.props.link,
+      open: false
     };
+  }
+
+  openMenu = () => {
+    this.setState({
+      open: true
+    });
+  }
+
+  handleClose = () => {
+    this.setState({
+      open: false
+    });
+  }
+
+  // Open new tab with given url
+  handleUrl = (url) => {
+    window.open(url);
+    this.handleClose();
   }
 
   render() {
 
-    const { comments, link } = this.state;
+    const { height, comments, link, open } = this.state;
     const feedCardIconTheme = palette.icons.feedcard;
 
     return (
       <Grid
         container
         direction="row"
-        justify="flex-end"
+        justify="center"
         alignItems="center"
+        style={{ height }}
       >
         <Grid item>
           <IconButton
-            href={link}
+            onClick={this.openMenu}
           >
-            <LinkIcon 
+            <MenuIcon 
               style={{
                 color: feedCardIconTheme.link
               }}
             />
           </IconButton>
         </Grid>
-        {
-          comments &&
-          <Grid item>
-            <IconButton
-              href={comments}
+
+        <Dialog
+          open={open}
+          onClose={this.handleClose}
+          PaperProps={{
+            style: {backgroundColor: palette.mui.background.post}
+          }}
+        >
+          <List>
+            <ListItem
+              button
+              onClick={() => {
+                this.handleUrl(link)
+              }}
             >
-              <CommentIcon
+              <ListItemAvatar>
+                <Avatar>
+                  <LinkIcon 
+                    style={{ color: feedCardIconTheme.comments }}
+                  />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText 
+                primary="Link" 
                 style={{
-                  color: feedCardIconTheme.comments
+                  color: palette.text.feedcard.title
                 }}
               />
-            </IconButton>
-          </Grid>
-        }
+            </ListItem>
+            {
+              comments &&
+              <ListItem
+                button
+                onClick={() => {
+                  this.handleUrl(comments)
+                }}
+              >
+                <ListItemAvatar>
+                  <Avatar>
+                    <CommentIcon 
+                      style={{ color: feedCardIconTheme.comments }}
+                    />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText 
+                  primary="Comments"
+                  style={{
+                    color: palette.text.feedcard.title
+                  }}
+                />
+              </ListItem>
+            }
+          </List>
+        </Dialog>
       </Grid>
-    )
+    );
   }
 }
