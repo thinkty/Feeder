@@ -31,19 +31,7 @@ export default class FeedCardActions extends PureComponent {
       >
         <Grid item>
           <IconButton
-            size="small"
-          >
-            <SubjectIcon 
-              style={{
-                color: feedCardIconTheme.content
-              }}
-            />
-          </IconButton>
-        </Grid>
-        <Grid item>
-          <IconButton
             href={link}
-            size="small"
           >
             <LinkIcon 
               style={{
@@ -57,7 +45,6 @@ export default class FeedCardActions extends PureComponent {
           <Grid item>
             <IconButton
               href={comments}
-              size="small"
             >
               <CommentIcon
                 style={{
