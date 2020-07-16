@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 /**
  * This is a feed card component to display a previw of the
  * feed post. It includes the following fields from the feed
@@ -12,10 +11,8 @@ import React, { Component } from 'react';
  * - contents {html}
  */
 
-import { 
-  Paper,
-  Grid,
-} from '@material-ui/core';
+import React, { PureComponent } from 'react';
+import { Paper, Grid } from '@material-ui/core';
 import FeedCardTitle from './FeedCardTitle';
 import FeedCardAuthorAndDate from './FeedCardAuthorAndDate';
 import FeedCardActions from './FeedCardActions';
@@ -23,7 +20,7 @@ import FeedCardActions from './FeedCardActions';
 const palette = require('../../configs/palette.json');
 const geometry = require('../../configs/geometry.json');
 
-export default class FeedCard extends Component {
+export default class FeedCard extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -107,7 +104,6 @@ export default class FeedCard extends Component {
               <Grid item xs={4}>
                 <FeedCardActions 
                   comments={this.state.comments}
-                  content={this.state.content}
                   link={this.state.link}
                 />
               </Grid>

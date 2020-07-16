@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import { 
-  IconButton,
-  Grid
-} from '@material-ui/core';
+
+import React, { PureComponent } from 'react';
+import { IconButton, Grid } from '@material-ui/core';
 import SubjectIcon from '@material-ui/icons/Subject';
 import CommentIcon from '@material-ui/icons/Comment';
 import LinkIcon from '@material-ui/icons/Link';
 
 const palette = require('../../configs/palette.json');
 
-export default class FeedCardActions extends Component {
+export default class FeedCardActions extends PureComponent {
 
   constructor(props) {
     super(props);
     this.state = {
       comments: this.props.comments,
-      content: this.props.content, 
       link: this.props.link
     };
   }
 
   render() {
 
-    const { comments, content, link } = this.state;
+    const { comments, link } = this.state;
     const feedCardIconTheme = palette.icons.feedcard;
 
     return (

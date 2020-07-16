@@ -5,9 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import {
-  Typography,
-} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { FixedSizeList as List } from 'react-window';
 import FeedCard from '../FeedCard/FeedCard';
 
