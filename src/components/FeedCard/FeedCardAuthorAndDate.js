@@ -9,6 +9,7 @@ export default class FeedCardAuthorAndDate extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      width: this.props.width,
       date: this.props.date,
       author: this.props.author
     };
@@ -22,7 +23,8 @@ export default class FeedCardAuthorAndDate extends Component {
         variant="body2"
         noWrap
         style={{
-          color: palette.text.feedcard.authorAndDate
+          color: palette.text.feedcard.authorAndDate,
+          width: this.state.width * 0.8
         }}
       >
         {

@@ -9,6 +9,7 @@ export default class FeedCardTitle extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      width: this.props.width,
       title: this.props.title
     };
   }
@@ -22,6 +23,7 @@ export default class FeedCardTitle extends Component {
         style={{
           color: palette.text.feedcard.title,
           fontWeight: "normal",
+          width: this.state.width * 0.8
         }}
       >
         { this.state.title }

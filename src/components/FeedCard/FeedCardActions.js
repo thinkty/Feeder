@@ -10,7 +10,7 @@ import {
   ListItemAvatar,
   ListItemText
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CommentIcon from '@material-ui/icons/Comment';
 import LinkIcon from '@material-ui/icons/Link';
 
@@ -63,7 +63,7 @@ export default class FeedCardActions extends PureComponent {
           <IconButton
             onClick={this.openMenu}
           >
-            <MenuIcon 
+            <MoreVertIcon 
               style={{
                 color: feedCardIconTheme.link
               }}

@@ -112,6 +112,7 @@ export default class FeedContainer extends Component {
               <FeedCard 
                 item={item}
                 style={style}
+                width={Width}
               />
             );
           }}

@@ -25,6 +25,7 @@ export default class FeedCard extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      width: props.width,
       style: props.style,
       title: props.item.title,
       date: props.item.date,
@@ -61,59 +62,73 @@ export default class FeedCard extends PureComponent {
 
   render() {
 
-    const { style } = this.state;
+    const { style, width } = this.state;
     const { margin, height, padding } = geometry.feedcard;
 
     return (
-      <div>
-        <Paper
-          elevation={20}
-          variant="elevation"
-          style={{
-            ...style,
-            left: style.left + margin.left,
-            top: style.top + margin.top,
-            width: '98%',
-            height: height - margin.top,
-            backgroundColor: palette.mui.background.post,
-            padding: `${padding}px ${padding}px 0px ${padding}px`
-          }}
+      <Paper
+        variant="elevation"
+        elevation={0}
+        style={{
+          ...style,
+          height: height - margin.top,
+          padding: `${padding}px ${padding}px 0px ${padding}px`
+        }}
+      >
+        <Grid
+          container
+          spacing={1}
         >
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="flex-start"
-          >
-            <Grid item xs={12}>
-              <FeedCardTitle title={this.state.title}/>
-            </Grid>
-            <Grid
-              item
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
+          <Grid item xs={11}>
+            <Paper
+              variant="elevation"
+              elevation={0}
+              style={{
+                height: height - margin.top,
+                backgroundColor: palette.mui.background.post,
+                padding: `${padding}px ${padding}px 0px ${padding}px`
+              }}
             >
-              <Grid item xs={8}>
-                <FeedCardAuthorAndDate 
-                  date={this.state.date} 
-                  author={this.state.author}
-                />
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="flex-start"
+              >
+                <Grid item>
+                  <FeedCardTitle 
+                    title={this.state.title} 
+                    width={width} 
+                  />
+                </Grid>
+                <Grid item>
+                  <FeedCardAuthorAndDate 
+                    date={this.state.date} 
+                    author={this.state.author}
+                    width={width}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={4}>
-                <FeedCardActions 
-                  comments={this.state.comments}
-                  link={this.state.link}
-                />
-              </Grid>
-            </Grid>
+            </Paper>
           </Grid>
-        </Paper>
-
-        {/* Content Dialog */}
-
-      </div>
+          <Grid item xs={1}>
+            <Paper
+              variant="elevation"
+              elevation={0}
+              style={{
+                height: height - margin.top,
+                backgroundColor: palette.mui.background.post,
+              }}
+            >
+              <FeedCardActions 
+                height={height - margin.top}
+                comments={this.state.comments}
+                link={this.state.link}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Paper>
     );
   }
 }
