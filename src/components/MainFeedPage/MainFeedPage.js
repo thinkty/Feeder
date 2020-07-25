@@ -30,17 +30,16 @@ export default class MainFeedPage extends Component {
   }
 
   /**
-   * If connected to internet, read feeds from the specified
-   * feed list. If not connected to internet, read from
-   * local storage.
+   * If connected to internet, read feeds from the specified feed list. If not 
+   * connected to internet, load from local storage.
    */
   componentDidMount() {
     
     let feeds = this.state.feeds;
 
-    // Check if it is connected to internet
+    // Load feeds from local storage if not connected to internet
     if (!navigator.onLine) {
-      // TODO: Read from localStorage
+      this.loadFromLocalStorage();
       return;
     }
 
@@ -48,22 +47,27 @@ export default class MainFeedPage extends Component {
     let first = true;
     feedlist.feeds.forEach(feedInfo => {
 
+      // Parse feed from given rss url
       parser.parseURL(CORS + feedInfo.rss)
       .then(res => {
-        let posts = [];
-        res.items.forEach(item => {
+
+        // Process each items from the feed
+        const posts = res.items.map(item => {
           const temp = this.processItem(item);
           if (temp != null) {
-            posts.push(temp);
+            return temp;
           }
+          return null;
         });
 
+        // Save the processed feed
         feeds[feedInfo.name] = {
           feedInfo,
           posts
         }
         this.setState({ feeds });
 
+        // Select the first parsed feed
         if (first) {
           first = false;
           this.setState({
@@ -73,13 +77,24 @@ export default class MainFeedPage extends Component {
       })
       .catch(err => {
         console.error(err);
-        // TODO: Error handling
-      })
+      });
     });
   }
 
   /**
-   * Method to read the items from local storage
+   * Save retrieved feeds to local storage to use when there is no internet
+   * connection available.
+   * 
+   * @param {Object} feeds An object with the key of feedname and value of feed
+   * items
+   */
+  saveToLocalStorage = (feeds) => {
+    localStorage.setItem('feeds', JSON.stringify(feeds));
+  }
+
+  /**
+   * Method to read the items from local storage. This function should be called
+   * only when there are no internet connection.
    */
   loadFromLocalStorage = () => {
     const rawFeeds = localStorage.getItem('feeds');
@@ -126,12 +141,8 @@ export default class MainFeedPage extends Component {
     });
   }
 
-
   render() {
-    const {
-      feeds,
-      selected
-    } = this.state;
+    const { feeds, selected } = this.state;
 
     return (
       <Grid
