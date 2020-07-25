@@ -22,6 +22,9 @@ export default class FeedContainer extends Component {
     };
   }
 
+  /**
+   * Update the size of the feed container
+   */
   componentDidMount() {
     this.updateWindowWidth();
     window.addEventListener('resize', this.updateWindowWidth);
@@ -31,20 +34,21 @@ export default class FeedContainer extends Component {
     window.removeEventListener('resize', this.updateWindowWidth);
   }
 
+  /**
+   * Update if feed is yet undefined OR contents of the feed has changed
+   */
   componentDidUpdate() {
     const { feed } = this.props;
+    if (!feed) {
+      return;
+    }
 
-    if (feed !== undefined) {
-
-      // Update if feed is yet undefined OR
-      // contents of the feed has changed (which will not happen)
-      if (
-        this.state.feed === undefined ||
-        feed.posts.length !== this.state.feed.posts.length
-      ) {
-        this.setState({ feed });
-        return;
-      }
+    if (
+      this.state.feed === undefined ||
+      feed.posts.length !== this.state.feed.posts.length
+    ) {
+      this.setState({ feed });
+      return;
     }
   }
 
