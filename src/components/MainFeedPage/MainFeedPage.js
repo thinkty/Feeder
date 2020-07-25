@@ -66,6 +66,7 @@ export default class MainFeedPage extends Component {
           posts
         }
         this.setState({ feeds });
+        this.saveToLocalStorage(feeds);
 
         // Select the first parsed feed
         if (first) {
