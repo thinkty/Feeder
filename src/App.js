@@ -8,6 +8,9 @@ import 'typeface-muli';
 import MainFeedPage from './components/MainFeedPage';
 const palette = require('./configs/palette.json');
 
+/**
+ * Overall theme can be configured in configs/palette.json
+ */
 const theme = createMuiTheme({
   palette: palette.mui,
   typography: {
