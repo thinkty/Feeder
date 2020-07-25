@@ -11,7 +11,8 @@ import {
   checkAuthor,
   parseDate
 } from '../../utils/FeedParser';
-import FeedContainer from '../FeedContainer/FeedContainer';
+import FeedContainer from '../FeedContainer';
+import SettingsDialog from '../SettingsDialog';
 
 const feedlist = require('../../configs/feedlist.json');
 const Parser = require('rss-parser');
@@ -152,6 +153,7 @@ export default class MainFeedPage extends Component {
         justify="flex-start"
         alignItems="center"
       >
+        <SettingsDialog />
         <Grid item>
           <Typography
             variant="h3"
