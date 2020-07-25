@@ -1,4 +1,3 @@
-
 import React, { PureComponent } from 'react';
 import {
   IconButton,
@@ -16,6 +15,9 @@ import LinkIcon from '@material-ui/icons/Link';
 
 const palette = require('../../configs/palette.json');
 
+/**
+ * Component to list original source url, or comments (unique to Hackernews)
+ */
 export default class FeedCardActions extends PureComponent {
 
   constructor(props) {

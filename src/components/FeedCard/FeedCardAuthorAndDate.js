@@ -1,9 +1,11 @@
-
 import React, { Component } from 'react';
 import { Typography } from '@material-ui/core';
 
 const palette = require('../../configs/palette.json');
 
+/**
+ * Component to show Author and Date of the post
+ */
 export default class FeedCardAuthorAndDate extends Component {
 
   constructor(props) {

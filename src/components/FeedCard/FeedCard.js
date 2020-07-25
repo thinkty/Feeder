@@ -1,25 +1,25 @@
-/**
- * This is a feed card component to display a previw of the
- * feed post. It includes the following fields from the feed
- * if available.
- * 
- * - title {String}
- * - date , author (creator) {String}
- * - link to that page {String}
- * - comments url {String} : unique to some feeds
- * - categories {Array} : unique to some feeds
- * - contents {html}
- */
-
 import React, { PureComponent } from 'react';
 import { Paper, Grid } from '@material-ui/core';
 import FeedCardTitle from './FeedCardTitle';
 import FeedCardAuthorAndDate from './FeedCardAuthorAndDate';
 import FeedCardActions from './FeedCardActions';
+import ContentDialog from './ContentDialog';
 
 const palette = require('../../configs/palette.json');
 const geometry = require('../../configs/geometry.json');
 
+/**
+ * This is a feed card component to display a previw of the
+ * feed post. It includes the following fields from the feed
+ * if available.
+ * 
+ * - title (String)
+ * - date , author/creator (String)
+ * - link to that page (String)
+ * - comments url (String) : unique to some feeds
+ * - categories (String) : unique to some feeds
+ * - contents (html)
+ */
 export default class FeedCard extends PureComponent {
 
   constructor(props) {
@@ -128,6 +128,11 @@ export default class FeedCard extends PureComponent {
             </Paper>
           </Grid>
         </Grid>
+        <ContentDialog 
+          open={this.state.openContent}
+          onClose={this.closeContentDialog}
+          content={this.state.content}
+        />
       </Paper>
     );
   }
