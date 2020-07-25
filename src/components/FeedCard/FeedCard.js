@@ -3,7 +3,6 @@ import { Paper, Grid } from '@material-ui/core';
 import FeedCardTitle from './FeedCardTitle';
 import FeedCardAuthorAndDate from './FeedCardAuthorAndDate';
 import FeedCardActions from './FeedCardActions';
-import ContentDialog from './ContentDialog';
 
 const palette = require('../../configs/palette.json');
 const geometry = require('../../configs/geometry.json');
@@ -33,31 +32,7 @@ export default class FeedCard extends PureComponent {
       link: props.item.link,
       comments: props.item.comments,
       categories: props.item.categories,
-      content: props.item.content,
-      openContent: false,
     };
-  }
-
-  /**
-   * Handler to show/hide contents of the feed
-   */
-  handleToggleContent = () => {
-    let currentState = this.state.openContent;
-    this.setState({
-      openContent: !currentState
-    });
-  }
-
-  openContentDialog = () => {
-    this.setState({
-      openContent: true
-    });
-  }
-  
-  closeContentDialog = () => {
-    this.setState({
-      openContent: false
-    });
   }
 
   render() {
@@ -80,7 +55,9 @@ export default class FeedCard extends PureComponent {
           spacing={1}
         >
           <Grid item xs={11}>
+            {/* Open content dialog on click */}
             <Paper
+              onClick={this.openContentDialog}
               variant="elevation"
               elevation={0}
               style={{
@@ -128,11 +105,6 @@ export default class FeedCard extends PureComponent {
             </Paper>
           </Grid>
         </Grid>
-        <ContentDialog 
-          open={this.state.openContent}
-          onClose={this.closeContentDialog}
-          content={this.state.content}
-        />
       </Paper>
     );
   }
