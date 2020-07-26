@@ -4,6 +4,9 @@
       "default": "#1f2d42",
       "paper": "#1f2d42",
       "post": "#344452"
+    },
+    "primary": {
+      "main": "#344452"
     }
   },
   "text": {
@@ -17,10 +20,5 @@
       "authorAndDate": "#8b96a4"
     }
   },
-  "icons": {
-    "feedcard": {
-      "comments": "#8b96a4",
-      "link": "#8b96a4"
-    }
-  }
+  "icons": "#8b96a4"
 }

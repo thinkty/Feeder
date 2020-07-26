@@ -177,12 +177,13 @@ export default class MainFeedPage extends Component {
             <FormControl>
               <Select
                 native
+                color="primary"
                 value={selected}
                 onChange={this.onSelectedChange}
                 style={{
                   width: '200px',
                   color: palette.text.main,
-                  backgroundColor: '#344452'
+                  backgroundColor: palette.mui.background.paper
                 }}
               >
                 {
