@@ -16,7 +16,6 @@ const geometry = require('../../configs/geometry.json');
  * - date , author/creator (String)
  * - link to that page (String)
  * - comments url (String) : unique to some feeds
- * - categories (String) : unique to some feeds
  * - contents (html)
  */
 export default class FeedCard extends PureComponent {
@@ -30,8 +29,7 @@ export default class FeedCard extends PureComponent {
       date: props.item.date,
       author: props.item.author,
       link: props.item.link,
-      comments: props.item.comments,
-      categories: props.item.categories,
+      comments: props.item.comments
     };
   }
 
