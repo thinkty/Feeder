@@ -8,10 +8,8 @@
   },
   "text": {
     "main": "#fdfdfc",
-    "sub": "#8b96a4",
     "header": "#b94220",
     "feed": {
-      "title": "#fdfdfc",
       "desc": "#8b96a4"
     },
     "feedcard": {
