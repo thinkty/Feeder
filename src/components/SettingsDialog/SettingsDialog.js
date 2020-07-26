@@ -60,7 +60,8 @@ export default class SettingsDialog extends Component {
               edge="end"
               onClick={this.openConfig}
               style={{
-                color: '#8b96a4'
+                color: '#8b96a4',
+                marginLeft: 'auto'
               }}
             >
               <SettingsIcon />
@@ -72,6 +73,7 @@ export default class SettingsDialog extends Component {
           fullScreen
           open={this.state.open}
           onClose={this.closeConfig}
+
         >
           <AppBar
             position="fixed"
@@ -93,7 +95,8 @@ export default class SettingsDialog extends Component {
               <IconButton
                 onClick={this.saveConfiguration}
                 style={{
-                  color: '#8b96a4'
+                  color: '#8b96a4',
+                  marginLeft: 'auto'
                 }}
               >
                 <SaveIcon />
