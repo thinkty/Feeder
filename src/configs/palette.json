@@ -2,8 +2,7 @@
   "mui": {
     "background": {
       "default": "#1f2d42",
-      "paper": "#1f2d42",
-      "post": "#344452"
+      "paper": "#1f2d42"
     },
     "primary": {
       "main": "#344452"
