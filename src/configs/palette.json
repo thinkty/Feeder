@@ -12,20 +12,16 @@
     "header": "#b94220",
     "feed": {
       "title": "#fdfdfc",
-      "group": "#8b96a4",
       "desc": "#8b96a4"
     },
     "feedcard": {
       "title": "#fdfdfc",
-      "authorAndDate": "#8b96a4",
-      "categories": "#fdfdfc"
+      "authorAndDate": "#8b96a4"
     }
   },
   "icons": {
     "feedcard": {
-      "categories": "#8b96a4",
       "comments": "#8b96a4",
-      "content": "#8b96a4",
       "link": "#8b96a4"
     }
   }
