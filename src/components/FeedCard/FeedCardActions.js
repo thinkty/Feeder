@@ -51,7 +51,7 @@ export default class FeedCardActions extends PureComponent {
   render() {
 
     const { height, comments, link, open } = this.state;
-    const feedCardIconTheme = palette.icons.feedcard;
+    const feedCardIconTheme = palette.icons;
 
     return (
       <Grid
@@ -67,7 +67,7 @@ export default class FeedCardActions extends PureComponent {
           >
             <MoreVertIcon 
               style={{
-                color: feedCardIconTheme.link
+                color: feedCardIconTheme
               }}
             />
           </IconButton>
@@ -77,7 +77,7 @@ export default class FeedCardActions extends PureComponent {
           open={open}
           onClose={this.handleClose}
           PaperProps={{
-            style: {backgroundColor: palette.mui.background.post}
+            style: {backgroundColor: palette.mui.primary.main}
           }}
         >
           <List>
@@ -90,7 +90,7 @@ export default class FeedCardActions extends PureComponent {
               <ListItemAvatar>
                 <Avatar>
                   <LinkIcon 
-                    style={{ color: feedCardIconTheme.comments }}
+                    style={{ color: feedCardIconTheme }}
                   />
                 </Avatar>
               </ListItemAvatar>
@@ -112,7 +112,7 @@ export default class FeedCardActions extends PureComponent {
                 <ListItemAvatar>
                   <Avatar>
                     <CommentIcon 
-                      style={{ color: feedCardIconTheme.comments }}
+                      style={{ color: feedCardIconTheme }}
                     />
                   </Avatar>
                 </ListItemAvatar>

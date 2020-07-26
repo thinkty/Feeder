@@ -53,14 +53,12 @@ export default class FeedCard extends PureComponent {
           spacing={1}
         >
           <Grid item xs={11}>
-            {/* Open content dialog on click */}
             <Paper
-              onClick={this.openContentDialog}
               variant="elevation"
               elevation={0}
               style={{
                 height: height - margin.top,
-                backgroundColor: palette.mui.background.post,
+                backgroundColor: palette.mui.primary.main,
                 padding: `${padding}px ${padding}px 0px ${padding}px`
               }}
             >
