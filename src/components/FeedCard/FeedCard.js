@@ -90,7 +90,7 @@ export default class FeedCard extends PureComponent {
               elevation={0}
               style={{
                 height: height - margin.top,
-                backgroundColor: palette.mui.background.post,
+                backgroundColor: palette.mui.primary.main,
               }}
             >
               <FeedCardActions 
