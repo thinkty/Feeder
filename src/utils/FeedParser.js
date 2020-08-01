@@ -35,7 +35,7 @@ const months = [
  * the necessary fields required to successfully
  * render a FeedCard component.
  */
-exports.checkItem = (item) => {
+export function checkItem(item) {
   requiredFields.forEach(field => {
     if (item[field] === undefined ||
         item[field] == null ||
@@ -54,7 +54,7 @@ exports.checkItem = (item) => {
  * If the item does not have author AND creator,
  * null is returned.
  */
-exports.checkAuthor = (item) => {
+export function checkAuthor(item) {
 
   // Check for author AND creator
   if (item.author === undefined &&
@@ -76,7 +76,7 @@ exports.checkAuthor = (item) => {
  * @param dateStr Date in various formats
  * @returns {String} Formatted date
  */
-exports.parseDate = (dateStr) => {
+export function parseDate(dateStr) {
 
   let date = new Date(dateStr);
   let result = date.getFullYear() + ' ';
