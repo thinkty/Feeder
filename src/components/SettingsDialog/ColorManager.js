@@ -39,9 +39,9 @@ export default class Editor extends Component {
         {/* Colors */}
         <Grid item>
           <Typography
-            variant="h6"
+            variant="h5"
             style={{
-              color: '#8b96a4',
+              color: '#fdfdfc',
               marginBottom: '10px'
             }}
           >

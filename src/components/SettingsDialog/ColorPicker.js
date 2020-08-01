@@ -32,7 +32,7 @@ export default class ColorPicker extends Component {
         direction="row"
         justify="space-between"
         alignItems="center"
-        spacing={1}
+        spacing={2}
         style={{
           marginBottom: '5px'
         }}
