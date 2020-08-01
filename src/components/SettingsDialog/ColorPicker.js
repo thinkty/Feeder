@@ -30,7 +30,7 @@ export default class ColorPicker extends Component {
         item
         container
         direction="row"
-        justify="center"
+        justify="space-between"
         alignItems="center"
         spacing={1}
         style={{
@@ -44,7 +44,7 @@ export default class ColorPicker extends Component {
               color: '#8b96a4'
             }}
           >
-            {this.state.field + ' : '}
+            {this.state.field}
           </Typography>
         </Grid>
         <Grid item>

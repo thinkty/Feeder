@@ -48,6 +48,7 @@ export default class Editor extends Component {
             Colors
           </Typography>
         </Grid>
+        <Grid item>
         {
           colors.map(field => {
             return (
@@ -58,6 +59,7 @@ export default class Editor extends Component {
             );
           })
         }
+        </Grid>
       </Grid>
     )
   }
