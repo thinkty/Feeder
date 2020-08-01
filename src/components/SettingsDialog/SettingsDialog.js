@@ -8,7 +8,7 @@ import {
   Dialog,
   DialogContent,
 } from '@material-ui/core';
-import Editor from './Editor';
+import ColorManager from './ColorManager';
 import FeedManager from './FeedManager';
 
 /**
@@ -88,7 +88,7 @@ export default class SettingsDialog extends Component {
           </AppBar>
 
           <DialogContent>
-            <Editor />
+            <ColorManager />
             <FeedManager />
           </DialogContent>
         </Dialog>
