@@ -13,6 +13,7 @@ import {
 } from '../../utils/FeedParser';
 import FeedContainer from '../FeedContainer';
 import SettingsDialog from '../SettingsDialog';
+import { setItem } from '../../utils/localstorageHandler';
 
 const feedlist = require('../../configs/feedlist.json');
 const Parser = require('rss-parser');
@@ -91,7 +92,7 @@ export default class MainFeedPage extends Component {
    * items
    */
   saveToLocalStorage = (feeds) => {
-    localStorage.setItem('feeds', JSON.stringify(feeds));
+    setItem('feeds', feeds, true);
   }
 
   /**

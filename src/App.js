@@ -6,18 +6,23 @@ import {
 } from '@material-ui/core';
 import 'typeface-muli';
 import MainFeedPage from './components/MainFeedPage';
+import { getItem, setItem } from './utils/localstorageHandler';
 
 function App() {
 
   // If color does not exist, read from palette.json and save the result to 
   // local storage
   let colors;
-  if (localStorage.getItem('colors')) {
-    colors = JSON.parse(localStorage.getItem('colors'));
+  if (getItem('colors', true)) {
+    colors = getItem('colors', true);
   } else {
     colors = require('./configs/palette.json');
-    localStorage.setItem('colors', JSON.stringify(colors));
+    setItem('colors', colors, true);
   }
+
+  // If feedlist does not exist, read from feedlist.json and save the result to
+  // local storage
+  
 
   return (
     <ThemeProvider 
