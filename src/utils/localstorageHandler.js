@@ -3,6 +3,18 @@
  */
 
 /**
+ * Check if an object specified by the given key exists in local storage
+ * 
+ * @param {String} key 
+ */
+export function checkItem(key) {
+
+  assertKey(key);
+
+  return !!localStorage.getItem(key);
+}
+
+/**
  * Retrieve an item specified by the given key from local storage.
  * 
  * @param {String} key 
