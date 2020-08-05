@@ -4,7 +4,8 @@ import {
   Typography,
   Box,
   FormControl,
-  Select
+  Select,
+  LinearProgress
 } from '@material-ui/core';
 import { 
   checkItem, 
@@ -28,7 +29,6 @@ export default class MainFeedPage extends Component {
       feeds: {},
       selected: null
     };
-
   }
 
   /**
@@ -36,17 +36,18 @@ export default class MainFeedPage extends Component {
    * connected to internet, load from local storage.
    */
   componentDidMount() {
-    
-    let feeds = this.state.feeds;
-
     // Load feeds from local storage if not connected to internet
     if (!navigator.onLine) {
       this.loadFromLocalStorage();
       return;
     }
 
+    this.retrieveFeeds();
+  }
+
+  retrieveFeeds = () => {
+    const feeds = this.state.feeds;
     let parser = new Parser();
-    let first = true;
     feedlist.feeds.forEach(feedInfo => {
 
       // Parse feed from given rss url
@@ -56,26 +57,18 @@ export default class MainFeedPage extends Component {
         // Process each items from the feed
         const posts = res.items.map(item => {
           const temp = this.processItem(item);
-          if (temp != null) {
-            return temp;
-          }
+          if (temp != null) { return temp }
           return null;
         });
 
         // Save the processed feed
-        feeds[feedInfo.name] = {
-          feedInfo,
-          posts
-        }
+        feeds[feedInfo.name] = { feedInfo, posts };
         this.setState({ feeds });
         this.saveToLocalStorage(feeds);
 
         // Select the first parsed feed
-        if (first) {
-          first = false;
-          this.setState({
-            selected: feedInfo.name
-          });
+        if (!this.state.selected) {
+          this.setState({ selected: feedInfo.name });
         }
       })
       .catch(err => {
@@ -173,6 +166,10 @@ export default class MainFeedPage extends Component {
           </Typography>
         </Grid>
         {
+          !selected &&
+          <LinearProgress style={{ width: '200px' }} />
+        }
+        {
           selected &&
           <Grid item>
             <FormControl>
@@ -206,11 +203,14 @@ export default class MainFeedPage extends Component {
             </FormControl>
           </Grid>
         }
-        <Grid item>
-          <FeedContainer 
-            feed={feeds[selected]}
-          />
-        </Grid>
+        {
+          selected &&
+          <Grid item>
+            <FeedContainer 
+              feed={feeds[selected]}
+            />
+          </Grid>
+        }
       </Grid>
     )
   }
