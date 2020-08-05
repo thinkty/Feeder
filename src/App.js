@@ -4,7 +4,6 @@ import {
   createMuiTheme,
   CssBaseline
 } from '@material-ui/core';
-import 'typeface-muli';
 import MainFeedPage from './components/MainFeedPage';
 import { getItem, setItem, checkItem } from './utils/localstorageHandler';
 
@@ -30,7 +29,7 @@ function App() {
     <ThemeProvider 
       theme={createMuiTheme({
         typography: {
-          fontFamily: 'Muli',
+          fontFamily: 'Arial',
         },
         palette: colors.mui
       })}
