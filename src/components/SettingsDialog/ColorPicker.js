@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ChromePicker } from 'react-color';
 import { Grid, Typography, Button } from '@material-ui/core';
 import { getItem } from '../../utils/localstorageHandler';
 

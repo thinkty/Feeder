@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { TextField, IconButton, Grid, Typography } from '@material-ui/core';
+import { IconButton, Grid, Typography } from '@material-ui/core';
 
 
 /**
