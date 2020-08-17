@@ -3,31 +3,26 @@
     {
       "name": "Hacker News",
       "desc": "The frontpage of Hacker News",
-      "group": "news",
       "rss": "https://hnrss.org/frontpage"
     },
     {
       "name": "Hackster.io",
       "desc": "Trending projects from Hackster.io",
-      "group": "projects",
       "rss": "https://www.hackster.io/projects.rss?sort=trending"
     },
     {
       "name": "Dev.to",
       "desc": "Feeds from Dev.to",
-      "group": "posts",
       "rss": "https://dev.to/feed/"
     },
     {
       "name": "Reddit",
       "desc": "The frontpage of Reddit",
-      "group": "posts",
       "rss": "https://www.reddit.com/.rss"
     },
     {
       "name": "Product Hunt",
       "desc": "Trending products",
-      "group": "projects",
       "rss": "https://www.producthunt.com/feed?category=undefined"
     }
   ]

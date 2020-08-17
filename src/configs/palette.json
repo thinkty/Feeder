@@ -2,31 +2,22 @@
   "mui": {
     "background": {
       "default": "#1f2d42",
-      "paper": "#1f2d42",
-      "post": "#344452"
+      "paper": "#1f2d42"
+    },
+    "primary": {
+      "main": "#344452"
     }
   },
   "text": {
     "main": "#fdfdfc",
-    "sub": "#8b96a4",
     "header": "#b94220",
     "feed": {
-      "title": "#fdfdfc",
-      "group": "#8b96a4",
       "desc": "#8b96a4"
     },
     "feedcard": {
       "title": "#fdfdfc",
-      "authorAndDate": "#8b96a4",
-      "categories": "#fdfdfc"
+      "authorAndDate": "#8b96a4"
     }
   },
-  "icons": {
-    "feedcard": {
-      "categories": "#8b96a4",
-      "comments": "#8b96a4",
-      "content": "#8b96a4",
-      "link": "#8b96a4"
-    }
-  }
+  "icons": "#8b96a4"
 }

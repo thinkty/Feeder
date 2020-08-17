@@ -4,34 +4,35 @@ import {
   createMuiTheme,
   CssBaseline
 } from '@material-ui/core';
-import 'typeface-muli';
 import MainFeedPage from './components/MainFeedPage';
-const palette = require('./configs/palette.json');
-
-/**
- * Overall theme can be configured in configs/palette.json
- */
-const theme = createMuiTheme({
-  palette: palette.mui,
-  typography: {
-    fontFamily: 'Muli',
-  },
-  overrides: {
-    MuiSelect: {
-      root: {
-        color: '#fff'
-      },
-      select: {
-        color: '#fff'
-      }
-    }
-  }
-});
+import { getItem, setItem, checkItem } from './utils/localstorageHandler';
 
 function App() {
+
+  // If color does not exist, read from palette.json and save the result to 
+  // local storage
+  let colors;
+  if (checkItem('colors')) {
+    colors = getItem('colors', true);
+  } else {
+    colors = require('./configs/palette.json');
+    setItem('colors', colors, true);
+  }
+
+  // If feedlist does not exist, read from feedlist.json and save the result to
+  // local storage
+  if (!checkItem('feedlist')) {
+    setItem('feedlist', require('./configs/feedlist.json'), true);
+  }
+
   return (
     <ThemeProvider 
-      theme={theme}
+      theme={createMuiTheme({
+        typography: {
+          fontFamily: 'Arial',
+        },
+        palette: colors.mui
+      })}
     >
       <CssBaseline />
       <MainFeedPage/>

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import SettingsIcon from '@material-ui/icons/Settings';
 import CloseIcon from '@material-ui/icons/Close';
-import SaveIcon from '@material-ui/icons/Save';
 import {
   AppBar,
   Toolbar,
   IconButton,
   Dialog,
+  DialogContent,
 } from '@material-ui/core';
+import ColorManager from './ColorManager';
+import FeedManager from './FeedManager';
 
 /**
  * Component to configure colors and manage feedlists
@@ -33,16 +35,6 @@ export default class SettingsDialog extends Component {
       open: false
     });
   }
-
-  /**
-   * Save the modified configurations for colors and feedlists
-   */
-  saveConfiguration = () => {
-    // TODO:
-
-    this.closeConfig();
-  }
-
 
   render() {
     return (
@@ -73,37 +65,32 @@ export default class SettingsDialog extends Component {
           fullScreen
           open={this.state.open}
           onClose={this.closeConfig}
-
         >
           <AppBar
             position="fixed"
             variant="elevation"
             elevation={0}
             style={{
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
             }}
           >
             <Toolbar>
               <IconButton
                 onClick={this.closeConfig}
                 style={{
-                  color: '#8b96a4'
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-              <IconButton
-                onClick={this.saveConfiguration}
-                style={{
                   color: '#8b96a4',
                   marginLeft: 'auto'
                 }}
               >
-                <SaveIcon />
+                <CloseIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
 
+          <DialogContent>
+            <ColorManager />
+            <FeedManager />
+          </DialogContent>
         </Dialog>
       </div>
     )

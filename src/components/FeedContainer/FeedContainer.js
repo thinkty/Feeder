@@ -12,6 +12,9 @@ import FeedCard from '../FeedCard/FeedCard';
 const palette = require('../../configs/palette.json');
 const geometry = require('../../configs/geometry.json');
 
+// For scrolling back to top on switching between feeds
+const listRef = React.createRef();
+
 export default class FeedContainer extends Component {
 
   constructor(props) {
@@ -43,11 +46,15 @@ export default class FeedContainer extends Component {
       return;
     }
 
-    if (
-      this.state.feed === undefined ||
+    if (this.state.feed === undefined ||
       feed.posts.length !== this.state.feed.posts.length
     ) {
       this.setState({ feed });
+
+      // Scroll back to top when possible on feed change
+      if (!!listRef.current) {
+        listRef.current.scrollToItem(0);
+      }
       return;
     }
   }
@@ -104,6 +111,7 @@ export default class FeedContainer extends Component {
           { feedInfo.desc }
         </Typography>
         <List
+          ref={listRef}
           layout="vertical"
           height={Height}
           width={Width}
