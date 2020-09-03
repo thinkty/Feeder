@@ -8,8 +8,8 @@ import React, { Component } from 'react';
 import { Typography } from '@material-ui/core';
 import { FixedSizeList as List } from 'react-window';
 import FeedCard from '../FeedCard/FeedCard';
+import { checkItem, getItem } from '../../utils/localstorageHandler';
 
-const palette = require('../../configs/palette.json');
 const geometry = require('../../configs/geometry.json');
 
 // For scrolling back to top on switching between feeds
@@ -97,6 +97,7 @@ export default class FeedContainer extends Component {
     const Height = window.innerHeight - 320;
     const Width = this.state.windowWidth - geometry.feedcontainer.margin;
     const { feedInfo, posts } = this.state.feed;
+    const palette = checkItem('colors') ? getItem('colors', true) : require('../../configs/palette.json');
 
     return (
       <div>

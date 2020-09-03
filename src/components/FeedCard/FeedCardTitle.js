@@ -6,8 +6,7 @@ import {
   Grid
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-
-const palette = require('../../configs/palette.json');
+import { checkItem, getItem } from '../../utils/localstorageHandler';
 
 /**
  * Component to show Title of the post
@@ -36,6 +35,7 @@ export default class FeedCardTitle extends Component {
   }
 
   render() {
+    const palette = checkItem('colors') ? getItem('colors', true) : require('../../configs/palette.json');
     return (
       <div>
         <div 

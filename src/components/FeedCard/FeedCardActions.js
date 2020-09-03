@@ -12,8 +12,7 @@ import {
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CommentIcon from '@material-ui/icons/Comment';
 import LinkIcon from '@material-ui/icons/Link';
-
-const palette = require('../../configs/palette.json');
+import { checkItem, getItem } from '../../utils/localstorageHandler';
 
 /**
  * Component to list original source url, or comments (unique to Hackernews)
@@ -50,6 +49,7 @@ export default class FeedCardActions extends PureComponent {
 
   render() {
 
+    const palette = checkItem('colors') ? getItem('colors', true) : require('../../configs/palette.json');
     const { height, comments, link, open } = this.state;
     const feedCardIconTheme = palette.icons;
 

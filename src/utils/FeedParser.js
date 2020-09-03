@@ -35,7 +35,7 @@ const months = [
  * the necessary fields required to successfully
  * render a FeedCard component.
  */
-export function checkItem(item) {
+export function validateItem(item) {
   requiredFields.forEach(field => {
     if (item[field] === undefined ||
         item[field] == null ||

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Typography } from '@material-ui/core';
-
-const palette = require('../../configs/palette.json');
+import { checkItem, getItem } from '../../utils/localstorageHandler';
 
 /**
  * Component to show Author and Date of the post
@@ -18,6 +17,7 @@ export default class FeedCardAuthorAndDate extends Component {
   }
 
   render() {
+    const palette = checkItem('colors') ? getItem('colors', true) : require('../../configs/palette.json');
     const { date, author } = this.state;
 
     return (

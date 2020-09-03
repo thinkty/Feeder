@@ -8,18 +8,17 @@ import {
   LinearProgress
 } from '@material-ui/core';
 import { 
-  checkItem, 
+  validateItem, 
   checkAuthor,
   parseDate
 } from '../../utils/FeedParser';
 import FeedContainer from '../FeedContainer';
 import SettingsDialog from '../SettingsDialog';
-import { setItem } from '../../utils/localstorageHandler';
+import { setItem, getItem, checkItem } from '../../utils/localstorageHandler';
 
 const feedlist = require('../../configs/feedlist.json');
 const Parser = require('rss-parser');
 const CORS = 'https://private-cors-anywhere.herokuapp.com/';
-const palette = require('../../configs/palette.json');
 
 export default class MainFeedPage extends Component {
 
@@ -112,7 +111,7 @@ export default class MainFeedPage extends Component {
   processItem = (item) => {
 
     // Check the required fields
-    if (!checkItem(item)) {
+    if (!validateItem(item)) {
       return null;
     }
 
@@ -139,6 +138,7 @@ export default class MainFeedPage extends Component {
 
   render() {
     const { feeds, selected } = this.state;
+    const palette = checkItem('colors') ? getItem('colors', true) : require('../../configs/palette.json');
 
     return (
       <Grid
