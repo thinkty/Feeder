@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { Grid, Typography, Button } from '@material-ui/core';
-import { getItem } from '../../utils/localstorageHandler';
+import { getItem, checkItem } from '../../utils/localstorageHandler';
+
+const palette = require('../../configs/palette.json');
+const map = {
+  background: 'backgroundDefault',
+  primary: 'primaryMain',
+  header: 'textHeader',
+  main: 'textMain',
+  desc: 'textFeedDesc',
+  title: 'textFeedcardTitle',
+  author: 'textFeedcardAuthorAndDate'
+};
 
 /**
  * An input component to pick a color
@@ -12,14 +23,16 @@ export default class ColorPicker extends Component {
 
     // Fetch the value from local storage
     let initialValue = null;
-    if (getItem('colors')) {
-      initialValue = getItem('colors')[this.props.field];
+    if (checkItem('colors')) {
+      initialValue = getItem('colors', true)[map[this.props.field]];
+    } else {
+      initialValue = palette[map[this.props.field]];
     }
 
     this.state = {
       field: this.props.field,
       focused: false,
-      value: initialValue ? initialValue : ''
+      value: initialValue
     }
   }
 
@@ -50,7 +63,7 @@ export default class ColorPicker extends Component {
           <Button
             style={{
               // TODO: Set background color as the current value
-              backgroundColor: '#fff'
+              backgroundColor: this.state.value
             }}
           />
         </Grid>
