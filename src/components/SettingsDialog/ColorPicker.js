@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Grid, Typography, Button } from '@material-ui/core';
-import { getItem, checkItem } from '../../utils/localstorageHandler';
+import { Grid, Typography, Button, Dialog } from '@material-ui/core';
+import { ChromePicker } from 'react-color';
+import { getItem, checkItem, setItem } from '../../utils/localstorageHandler';
 
 const palette = require('../../configs/palette.json');
 const map = {
@@ -32,8 +33,25 @@ export default class ColorPicker extends Component {
     this.state = {
       field: this.props.field,
       focused: false,
-      value: initialValue
+      value: initialValue,
+      open: false,
     }
+  }
+
+  openColorPicker = () => {
+    this.setState({ open: true });
+  }
+
+  closeColorPicker = () => {
+    this.setState({ open: false });
+  }
+
+  saveColor = (color) => {
+    const value = color.hex;
+    this.setState({ value });
+    const colors = checkItem('colors') ? getItem('colors') : palette;
+    colors[map[this.state.field]] = value;
+    setItem('colors', colors, true);
   }
 
   render() {
@@ -61,12 +79,22 @@ export default class ColorPicker extends Component {
         </Grid>
         <Grid item>
           <Button
+            onClick={this.openColorPicker}
             style={{
               // TODO: Set background color as the current value
               backgroundColor: this.state.value
             }}
           />
         </Grid>
+        <Dialog
+          open={this.state.open}
+          onClose={this.closeColorPicker}
+        >
+          <ChromePicker
+            color={this.state.value}
+            onChangeComplete={this.saveColor}
+          />
+        </Dialog>
       </Grid>
     )
   }
