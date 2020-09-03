@@ -25,7 +25,7 @@ export default class FeedCardAuthorAndDate extends Component {
         variant="body2"
         noWrap
         style={{
-          color: palette.text.feedcard.authorAndDate,
+          color: palette.textFeedcardAuthorAndDate,
           width: this.state.width * 0.8
         }}
       >

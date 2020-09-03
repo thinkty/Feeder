@@ -103,7 +103,7 @@ export default class FeedContainer extends Component {
         <Typography
           variant="body2"
           style={{
-            color: palette.text.feed.desc,
+            color: palette.textFeedDesc,
             margin: geometry.feedcontainer.margin
           }}
           align="center"

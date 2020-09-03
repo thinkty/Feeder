@@ -77,7 +77,7 @@ export default class FeedCardActions extends PureComponent {
           open={open}
           onClose={this.handleClose}
           PaperProps={{
-            style: {backgroundColor: palette.mui.primary.main}
+            style: {backgroundColor: palette.primaryMain}
           }}
         >
           <List>
@@ -97,7 +97,7 @@ export default class FeedCardActions extends PureComponent {
               <ListItemText 
                 primary="Link" 
                 style={{
-                  color: palette.text.feedcard.title
+                  color: palette.textFeedcardTitle
                 }}
               />
             </ListItem>
@@ -119,7 +119,7 @@ export default class FeedCardActions extends PureComponent {
                 <ListItemText 
                   primary="Comments"
                   style={{
-                    color: palette.text.feedcard.title
+                    color: palette.textFeedcardTitle
                   }}
                 />
               </ListItem>

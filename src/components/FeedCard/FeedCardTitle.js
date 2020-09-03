@@ -46,7 +46,7 @@ export default class FeedCardTitle extends Component {
             noWrap
             gutterBottom
             style={{
-              color: palette.text.feedcard.title,
+              color: palette.textFeedcardTitle,
               fontWeight: "normal",
               width: this.state.width * 0.8
             }}
@@ -68,7 +68,7 @@ export default class FeedCardTitle extends Component {
               <Typography
                 variant="body1"
                 style={{
-                  color: palette.text.feedcard.title,
+                  color: palette.textFeedcardTitle,
                   margin: '10px'
                 }}
               >

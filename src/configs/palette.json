@@ -1,23 +1,11 @@
 {
-  "mui": {
-    "background": {
-      "default": "#1f2d42",
-      "paper": "#1f2d42"
-    },
-    "primary": {
-      "main": "#344452"
-    }
-  },
-  "text": {
-    "main": "#fdfdfc",
-    "header": "#b94220",
-    "feed": {
-      "desc": "#8b96a4"
-    },
-    "feedcard": {
-      "title": "#fdfdfc",
-      "authorAndDate": "#8b96a4"
-    }
-  },
+  "backgroundDefault": "#1f2d42",
+  "backgroundPaper": "#1f2d42",
+  "primaryMain": "#344452",
+  "textMain": "#fdfdfc",
+  "textHeader": "#b94220",
+  "textFeedDesc": "#8b96a4",
+  "textFeedcardTitle": "#fdfdfc",
+  "textFeedcardAuthorAndDate": "#8b96a4",
   "icons": "#8b96a4"
 }

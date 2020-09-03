@@ -155,7 +155,7 @@ export default class MainFeedPage extends Component {
               marginTop: '100px',
               marginBottom: '50px',
               fontWeight: 'bold',
-              color: palette.text.header
+              color: palette.textHeader
             }}
           >
             <Box
@@ -180,8 +180,8 @@ export default class MainFeedPage extends Component {
                 onChange={this.onSelectedChange}
                 style={{
                   width: '200px',
-                  color: palette.text.main,
-                  backgroundColor: palette.mui.background.paper
+                  color: palette.textMain,
+                  backgroundColor: palette.backgroundPaper
                 }}
               >
                 {

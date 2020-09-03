@@ -58,7 +58,7 @@ export default class FeedCard extends PureComponent {
               elevation={0}
               style={{
                 height: height - margin.top,
-                backgroundColor: palette.mui.primary.main,
+                backgroundColor: palette.primaryMain,
                 padding: `${padding}px ${padding}px 0px ${padding}px`
               }}
             >
@@ -90,7 +90,7 @@ export default class FeedCard extends PureComponent {
               elevation={0}
               style={{
                 height: height - margin.top,
-                backgroundColor: palette.mui.primary.main,
+                backgroundColor: palette.primaryMain,
               }}
             >
               <FeedCardActions 
