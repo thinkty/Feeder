@@ -3,7 +3,6 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import { getItem, setItem } from '../../utils/localstorageHandler';
 
-
 /**
  * Component to edit feed url
  */ 
@@ -43,10 +42,7 @@ export default class FeedPicker extends Component {
           spacing={2}
         >
           <Grid item>
-            <Typography
-              variant="body1"
-              style={{ color: '#8b96a4' }}
-            >
+            <Typography variant="body1" style={{ color: '#8b96a4' }}>
               { this.state.name }
             </Typography>
           </Grid>

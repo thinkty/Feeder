@@ -13,13 +13,11 @@ export default function FeedManager() {
 
   return (
     <Grid
-    container
-    direction="column"
-    justify="center"
-    alignItems="center"
-    style={{
-      marginTop: '10px'
-    }}
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      style={{ marginTop: '10px' }}
     >
       <Grid item>
         <Typography
@@ -36,10 +34,7 @@ export default function FeedManager() {
       <Grid item>
         {
           feeds.map(feed => (
-            <FeedPicker
-              key={feed[Object.keys(feed)[0]]}
-              feed={feed}
-            />
+            <FeedPicker key={feed[Object.keys(feed)[0]]} feed={feed} />
           ))
         }
       </Grid>
