@@ -43,6 +43,17 @@ export default function FeedManager() {
           ))
         }
       </Grid>
+      <Grid item>
+        <Typography
+          style={{
+            color: '#8b96a4',
+            marginTop: '30px',
+            marginBottom: '10px'
+          }}
+        >
+          Refresh the page for the changes to take effect
+        </Typography>
+      </Grid>
     </Grid>
   );
 }
