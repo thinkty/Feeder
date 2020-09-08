@@ -16,7 +16,6 @@ import FeedContainer from '../FeedContainer';
 import SettingsDialog from '../SettingsDialog';
 import { setItem, getItem, checkItem } from '../../utils/localstorageHandler';
 
-const feedlist = require('../../configs/feedlist.json');
 const Parser = require('rss-parser');
 const CORS = 'https://private-cors-anywhere.herokuapp.com/';
 
@@ -46,6 +45,7 @@ export default class MainFeedPage extends Component {
 
   retrieveFeeds = () => {
     const feeds = this.state.feeds;
+    const feedlist = getItem('feedlist', true);
     let parser = new Parser();
     feedlist.feeds.forEach(feedInfo => {
 
