@@ -35,7 +35,7 @@ export default class ColorPicker extends Component {
       focused: false,
       value: initialValue,
       open: false,
-    }
+    };
   }
 
   openColorPicker = () => {
@@ -63,39 +63,26 @@ export default class ColorPicker extends Component {
         justify="space-between"
         alignItems="center"
         spacing={2}
-        style={{
-          marginBottom: '5px'
-        }}
+        style={{ marginBottom: '5px' }}
       >
         <Grid item>
-          <Typography
-            variant="body1"
-            style={{
-              color: '#8b96a4'
-            }}
-          >
+          <Typography variant="body1" style={{ color: '#8b96a4' }}>
             {this.state.field}
           </Typography>
         </Grid>
         <Grid item>
           <Button
             onClick={this.openColorPicker}
-            style={{
-              // TODO: Set background color as the current value
-              backgroundColor: this.state.value
-            }}
+            style={{ backgroundColor: this.state.value }}
           />
         </Grid>
-        <Dialog
-          open={this.state.open}
-          onClose={this.closeColorPicker}
-        >
+        <Dialog open={this.state.open} onClose={this.closeColorPicker}>
           <ChromePicker
             color={this.state.value}
             onChangeComplete={this.saveColor}
           />
         </Dialog>
       </Grid>
-    )
+    );
   }
 }

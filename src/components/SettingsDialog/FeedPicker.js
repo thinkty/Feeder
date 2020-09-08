@@ -67,38 +67,6 @@ export default class FeedPicker extends Component {
             </IconButton>
           </Grid>
         </Grid>
-
-
-        {/* <form
-          noValidate
-        >
-          {
-            Object.keys(this.state).map(key => {
-              if (key !== "modified") {
-                return (
-                  <TextField 
-                    key={key}
-                    id={key}
-                    value={this.state[key]}
-                    onChange={this.onChange}
-                    label={key}
-                    inputProps={{
-                      style: {
-                        color: '#fdfdfc'
-                      }
-                    }}
-                    InputLabelProps={{
-                      style: {
-                        color: '#8b96a4'
-                      }
-                    }}
-                  />
-                );
-              }
-              return null;
-            })
-          }
-        </form> */}
       </div>
     );
   }
