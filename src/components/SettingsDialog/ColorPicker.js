@@ -49,7 +49,7 @@ export default class ColorPicker extends Component {
   saveColor = (color) => {
     const value = color.hex;
     this.setState({ value });
-    const colors = checkItem('colors') ? getItem('colors') : palette;
+    const colors = checkItem('colors') ? getItem('colors', true) : palette;
     colors[map[this.state.field]] = value;
     setItem('colors', colors, true);
   }

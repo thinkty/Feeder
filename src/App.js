@@ -19,7 +19,7 @@ function App() {
     setItem('feedlist', require('./configs/feedlist.json'), true);
   }
 
-  const { backgroundDefault, backgroundPaper, primaryMain } = colors;
+  const { backgroundDefault, primaryMain } = colors;
 
   return (
     <ThemeProvider 
@@ -28,7 +28,7 @@ function App() {
         palette: {
           background: {
             default: backgroundDefault,
-            paper: backgroundPaper,
+            paper: backgroundDefault,
           },
           primary: { main: primaryMain },
         }
